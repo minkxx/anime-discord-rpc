@@ -1,5 +1,18 @@
 # Anime Discord RPC
 
+<div align="center">
+
+![banner](./assets/discord-activity.png)
+</div>
+
+<div align="center">
+
+![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
+![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
+![Version](https://img.shields.io/badge/version-v1.0.0-blue?style=flat&labelColor=#808080)
+
+</div>
+
 Anime RPC is a browser extension and local Discord bridge that shows what you are currently watching in Discord Rich Presence.
 
 The extension watches supported anime streaming pages, sends playback updates to a local WebSocket host, and the host publishes the activity to your Discord profile.
