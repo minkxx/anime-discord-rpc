@@ -1,8 +1,7 @@
 # Anime Discord RPC
 
 <div align="center">
-
-![banner](./assets/discord-activity.png)
+    <img src="./assets/discord-activity.png" width="400" height="auto" alt="discord-activity">
 </div>
 
 <div align="center">
