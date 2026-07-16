@@ -25,7 +25,7 @@ export default defineBackground(() => {
 			if (ws?.readyState === WebSocket.OPEN) {
 				ws.send(JSON.stringify({ type: "STOPPED" }));
 			}
-		}, 15000);
+		}, 10000);
 	}
 
 	connect();
