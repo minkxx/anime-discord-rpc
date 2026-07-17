@@ -8,7 +8,7 @@
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v1.1.1-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v1.2.0-blue?style=flat&labelColor=#808080)
 
 </div>
 
@@ -26,6 +26,7 @@ The extension watches supported anime streaming pages, sends playback updates to
 
 - anikototv.to
 - anikoto.cz
+- aniwaves.ru
 
 ## Requirements
 
