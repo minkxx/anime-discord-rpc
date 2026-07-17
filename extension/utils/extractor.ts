@@ -1,4 +1,4 @@
-import { AnimeSite } from "@/strategies/types";
+import type { AnimeSite } from "../strategies/types";
 
 export function extractMatches(strategies: AnimeSite[]) {
 	const domains = strategies
