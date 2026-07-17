@@ -5,9 +5,10 @@ const CLIENT_ID = "1526911509878538340";
 
 export class DiscordManager {
 	private client: Client;
-	private isConnected: boolean = false;
+	private isConnected = false;
 	private reconnectTimeout: ReturnType<typeof setTimeout> | null = null;
-	private retryDelay: number = 5000;
+	private retryDelay = 5000;
+	private activityTimeout: ReturnType<typeof setTimeout> | null = null;
 
 	constructor() {
 		this.client = new Client({ clientId: CLIENT_ID });
@@ -59,6 +60,11 @@ export class DiscordManager {
 			return;
 		}
 
+		if (this.activityTimeout) {
+			clearTimeout(this.activityTimeout);
+			this.activityTimeout = null;
+		}
+
 		try {
 			if (payload.type === "STOPPED") {
 				this.client.user.clearActivity();
@@ -87,6 +93,15 @@ export class DiscordManager {
 				endTimestamp,
 				instance: false,
 			});
+
+			this.activityTimeout = setTimeout(() => {
+				console.log(
+					"No updates received for 10 seconds. Clearing Discord activity.",
+				);
+				if (this.isConnected && this.client.user) {
+					this.client.user.clearActivity();
+				}
+			}, 10000);
 		} catch (error) {
 			console.error("Failed to update Discord presence:", error);
 		}
