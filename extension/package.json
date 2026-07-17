@@ -2,7 +2,7 @@
 	"name": "Anime RPC",
 	"description": "A browser extension to show current watching anime in your discord activity.",
 	"private": true,
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"type": "module",
 	"scripts": {
 		"dev": "wxt",
@@ -12,9 +12,12 @@
 		"zip": "wxt zip",
 		"zip:firefox": "wxt zip -b firefox",
 		"compile": "tsc --noEmit",
-		"postinstall": "wxt prepare"
+		"postinstall": "wxt prepare",
+		"check": "biome check",
+		"check:fix": "biome check --write"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "2.5.4",
 		"typescript": "^5.9.3",
 		"wxt": "^0.20.27"
 	}
