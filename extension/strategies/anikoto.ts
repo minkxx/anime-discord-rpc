@@ -3,7 +3,7 @@ import type { AnimeSite } from "./types";
 
 export const anikotoStrategy: AnimeSite = {
 	domains: ["anikototv.to", "anikoto.cz"],
-	iframe_src: ["vidtube.site", "megaplay.buzz"],
+	iframe_src: ["vidtube.site", "megaplay.buzz", "viswish.live"],
 
 	getAnimeMetadata: () => {
 		const titleElement = document.querySelector("h1.title");
