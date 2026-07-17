@@ -19,7 +19,10 @@
 			"a11y": {
 				"noSvgWithoutTitle": "off"
 			},
-			"style": { "useConst": "off" }
+			"style": { "useConst": "off" },
+			"complexity": {
+				"useOptionalChain": "off"
+			}
 		}
 	},
 	"javascript": {
