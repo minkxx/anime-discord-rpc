@@ -1,5 +1,5 @@
-import { strategies } from "@/strategies";
-import { extractMatches } from "@/utils/extractor";
+import { strategies } from "../strategies";
+import { extractMatches } from "../utils/extractor";
 
 export default defineContentScript({
 	matches: [...extractMatches(strategies)],
