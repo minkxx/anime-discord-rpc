@@ -1,5 +1,5 @@
-import { parseTimeText } from "@/utils/parser";
-import { AnimeSite } from "./types";
+import { parseTimeText } from "../utils/parser";
+import type { AnimeSite } from "./types";
 
 export const anikotoStrategy: AnimeSite = {
 	domains: ["anikototv.to", "anikoto.cz"],
