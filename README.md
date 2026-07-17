@@ -8,7 +8,7 @@
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v1.0.0-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v1.1.1-blue?style=flat&labelColor=#808080)
 
 </div>
 
@@ -31,11 +31,11 @@ The extension watches supported anime streaming pages, sends playback updates to
 
 - Discord desktop app installed and running.
 - A supported Chromium-based browser or Firefox.
-- Bun installed to run the local host manually, or the Windows startup launcher configured.
+- Bun installed to run the local host manually.
 
 ## Installation
 
-Before installing the browser extension, start the local host so Discord Rich Presence can receive updates.
+Before installing the browser extension, start the host so Discord Rich Presence can receive updates.
 
 ### Run the host manually
 
@@ -53,17 +53,7 @@ The repository includes a `start-rpc.vbs` launcher that starts the host in the b
 
 Once the shortcut is in the Startup folder, Windows will launch the host automatically when you sign in.
 
-### Chrome Web Store
-
-> [!WARNING]
-> 
-> Our extension is not available on the Chrome Web Store yet!
-
-### Firefox Add-ons
-
-> Our extension is under review for the firefox addons
-
-### Manual install from Releases
+### Install extension
 
 If you download a release ZIP file manually, extract it first and then install the browser extension from the extracted files.
 
@@ -83,49 +73,15 @@ If you download a release ZIP file manually, extract it first and then install t
 4. Click This Firefox.
 5. Click Load Temporary Add-on and select the extension manifest file from the extracted folder.
 
-## Development
+### Chrome Web Store
 
-Install dependencies:
+> [!WARNING]
+> 
+> Our extension is not available on the Chrome Web Store yet!
 
-```bash
-npm install
-```
+### Firefox Add-ons
 
-Run the extension in development mode:
-
-```bash
-npm run dev
-```
-
-Run the Firefox build in development mode:
-
-```bash
-npm run dev:firefox
-```
-
-Build release artifacts:
-
-```bash
-npm run build
-```
-
-Build a Firefox release:
-
-```bash
-npm run build:firefox
-```
-
-Create ZIP packages for release uploads:
-
-```bash
-npm run zip
-```
-
-Create a Firefox ZIP package:
-
-```bash
-npm run zip:firefox
-```
+> Our extension is under review for the firefox addons
 
 ## Project structure
 
