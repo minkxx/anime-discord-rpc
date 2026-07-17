@@ -36,9 +36,8 @@ The extension watches supported anime streaming pages, sends playback updates to
 
 ## Chrome Demo
 
-<video width="1920" height="auto" controls alt="assets/rpc-chrome-demo.mp4">
-  <source src="./assets/rpc-chrome-demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+<video width="1920" height="auto" controls>
+  <source src="https://ik.imagekit.io/9huvu1bd5/rpc-chrome-demo.mp4" type="video/mp4">
 </video>
 
 ## Installation
