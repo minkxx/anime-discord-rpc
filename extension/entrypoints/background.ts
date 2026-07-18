@@ -1,3 +1,5 @@
+import { fetchAnilistCover } from "../utils/anilist";
+
 interface IPayload {
 	type?: "WATCHING" | "PAUSED" | "STOPPED";
 	title?: string;
@@ -55,6 +57,15 @@ export default defineBackground(() => {
 			sendToHost({ type: "STOPPED" });
 			if (activityTimeout) clearTimeout(activityTimeout);
 			return;
+		}
+
+		if (message.type === "FETCH_ANILIST") {
+			const coverUrl = fetchAnilistCover(message.anilistId).then(
+				(coverUrl) => ({
+					coverUrl,
+				}),
+			);
+			return coverUrl;
 		}
 
 		if (message.type === "INFO_UPDATE") {
