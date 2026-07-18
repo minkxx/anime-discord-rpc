@@ -12,9 +12,9 @@ export const anikotoStrategy: AnimeSite = {
 			"#w-info .binfo .poster img",
 		) as HTMLImageElement;
 
-		const title = titleElement?.textContent?.trim() || "Unknown Anime";
-		const episode = episodeElement?.textContent?.trim() || "Unknown Episode";
-		const coverUrl = imageElement?.src || "No Image Found";
+		const title = titleElement?.textContent?.trim();
+		const episode = episodeElement?.textContent?.trim();
+		const coverUrl = imageElement?.src;
 
 		return {
 			title: titleElement ? title : null,
