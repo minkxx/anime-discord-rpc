@@ -8,7 +8,7 @@
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v1.2.0-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v1.3.0-blue?style=flat&labelColor=#808080)
 
 </div>
 
@@ -27,6 +27,7 @@ The extension watches supported anime streaming pages, sends playback updates to
 - anikototv.to
 - anikoto.cz
 - aniwaves.ru
+- animepahe.pw (and it's aliases)
 
 ## Requirements
 
@@ -40,8 +41,8 @@ The extension watches supported anime streaming pages, sends playback updates to
 
 ## Installation
 
-1. Download `host.zip` and `anime-rpc-x.x.x-chrome.zip` from the releases page.
-2. Extract `host.zip` to a folder on your computer.
+1. Download `host-x.x.x.zip` and `anime-rpc-x.x.x-chrome.zip` from the releases page.
+2. Extract `host-x.x.x.zip` to a folder on your computer.
 3. Open a terminal in the extracted host folder and run `bun install`.
 4. Open `host/start-rpc.vbs` and replace the `path_to_index.ts` path with the full path to your local `host/index.ts` file.
 5. Copy `start-rpc.vbs` into your Windows Startup folder by pressing `Win + R`, typing `shell:startup`, and pasting the file there.
