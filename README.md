@@ -16,19 +16,16 @@ Anime RPC is a browser extension and local Discord bridge that shows what you ar
 
 The extension watches supported anime streaming pages, sends playback updates to a local WebSocket host, and the host publishes the activity to your Discord profile.
 
-## Index
+## Table of contents
 
-| Topic | Jump to |
-| --- | --- |
-| What it does | [What it does](#what-it-does) |
-| Supported sites | [Supported sites](#supported-sites) |
-| Requirements | [Requirements](#requirements) |
-| Installation | [Installation](#installation) |
-| Firefox install | [Firefox Add-ons](#firefox-add-ons) |
-| Chrome install | [Chrome Extension](#chrome-extension) |
-| Chrome Web Store | [Chrome Web Store](#chrome-web-store) |
-| Project structure | [Project structure](#project-structure) |
-| License | [License](#license) |
+- [What it does](#what-it-does)
+- [Supported sites](#supported-sites)
+- [Requirements](#requirements)
+- [Installation](#installation)
+    - [Firefox Add-ons](#firefox-add-ons)
+    - [Chrome Extension](#chrome-extension)
+- [Project structure](#project-structure)
+- [License](#license)
 
 ## What it does
 
@@ -99,3 +96,5 @@ After both parts are set up, the extension will send playback updates to the loc
 ## License
 
 [MIT License](/LICENSE)
+
+Made with ❤️ by a weeb, for the weebs.
