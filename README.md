@@ -58,7 +58,7 @@ Pick the browser-specific install path below.
 Install the extension from the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/anikoto-discord-rpc/) and set up the host the same way as above:
 
 1. Open the Firefox Add-ons Store and install the [Anime Discord RPC extension](https://addons.mozilla.org/en-US/firefox/addon/anikoto-discord-rpc/).
-2. Download `host-x.x.x.zip` and extract it to a folder on your computer.
+2. Download `host-x.x.x.zip` from the [latest releases page](https://github.com/minkxx/anime-discord-rpc/releases) and extract it to a folder on your computer.
 3. Open a terminal in the extracted host folder and run `bun install`.
 4. Open `host/start-rpc.vbs` and replace the `path_to_index.ts` path with the full path to your local `host/index.ts` file.
 5. Copy `start-rpc.vbs` into your Windows Startup folder by pressing `Win + R`, typing `shell:startup`, and pasting the file there.
@@ -72,7 +72,7 @@ Once both the extension and host are running, open a supported anime site and Di
 
 Download the Chrome package and set it up manually with the same host steps:
 
-1. Download `host-x.x.x.zip` and `anime-rpc-x.x.x-chrome.zip` from the releases page.
+1. Download `host-x.x.x.zip` and `anime-rpc-x.x.x-chrome.zip` from the [latest releases page](https://github.com/minkxx/anime-discord-rpc/releases).
 2. Extract `host-x.x.x.zip` to a folder on your computer.
 3. Open a terminal in the extracted host folder and run `bun install`.
 4. Open `host/start-rpc.vbs` and replace the `path_to_index.ts` path with the full path to your local `host/index.ts` file.
