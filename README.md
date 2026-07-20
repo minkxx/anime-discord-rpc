@@ -25,6 +25,7 @@ The extension watches supported anime streaming pages, sends playback updates to
     - [Firefox Add-ons](#firefox-add-ons)
     - [Chrome Extension](#chrome-extension)
 - [Project structure](#project-structure)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## What it does
@@ -90,6 +91,12 @@ After both parts are set up, the extension will send playback updates to the loc
 
 - extension/ contains the browser extension built with WXT.
 - host/ contains the local Discord RPC bridge.
+
+## Contributing
+
+Contributions are always welcome! Whether it's adding support for a new anime site, fixing a bug, or improving the code, we'd love your help.
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) to learn how to set up the project locally, submit bug reports, or open a Pull Request.
 
 ## License
 
