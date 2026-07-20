@@ -82,8 +82,6 @@ Download the Chrome package and set it up manually with the same host steps:
 
 After both parts are set up, the extension will send playback updates to the local host and Discord Rich Presence will update automatically.
 
-### Chrome Web Store
-
 > [!WARNING]
 > 
 > Our extension is not available on the Chrome Web Store yet!
