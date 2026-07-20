@@ -21,7 +21,7 @@ Anime Discord RPC is split into two parts: the browser extension (built with WXT
 
 ### Prerequisites
 *   [Node.js](https://nodejs.org/) (for the extension environment)
-*   [Bun](https://bun.sh/) (for running the local host)[cite: 2]
+*   [Bun](https://bun.sh/) (for running the local host)
 
 ### 1. Extension Setup (`/extension`)
 1. Navigate to the extension folder: `cd extension`
