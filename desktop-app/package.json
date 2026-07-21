@@ -1,6 +1,6 @@
 {
 	"name": "anime-rpc-desktop",
-	"description": "My Electron application description",
+	"description": "A desktop application to receive anime data from browser extension and send rpc updates to local discord client.",
 	"productName": "anime-rpc-desktop",
 	"private": true,
 	"version": "1.0.0",
