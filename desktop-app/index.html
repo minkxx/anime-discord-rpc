@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Anime RPC</title>
+  </head>
+  <body>
+    <div class="tabs">
+      <button id="tab-status" class="tab-btn active">Status</button>
+      <button id="tab-logs" class="tab-btn">Logs</button>
+    </div>
+
+    <div id="view-status" class="view active-view">
+      <div class="status-badge" id="status">Idle</div>
+      <img id="cover" src="" alt="Anime Cover">
+      <h2 id="title">Not watching anything</h2>
+      <p id="episode"></p>
+    </div>
+
+    <div id="view-logs" class="view">
+      <div id="log-container"></div>
+    </div>
+    
+    <script type="module" src="/src/renderer.ts"></script>
+  </body>
+</html>
