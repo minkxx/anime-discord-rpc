@@ -4,6 +4,10 @@
     <img src="./assets/discord-activity.png" width="400" height="auto" alt="discord-activity">
 </div>
 
+**Show off the anime you're watching on your Discord profile!**
+
+Ever wanted your Discord status to show exactly which anime and episode you are watching? This tool does exactly that! When you play, pause, or stop an anime on a supported website, your Discord status updates automatically.
+
 <div align="center">
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
@@ -12,94 +16,74 @@
 
 </div>
 
-Anime RPC is a browser extension and local Discord bridge that shows what you are currently watching in Discord Rich Presence.
+---
 
-The extension watches supported anime streaming pages, sends playback updates to a local WebSocket host, and the host publishes the activity to your Discord profile.
+## What You Need
 
-## Table of contents
+* The **Discord desktop app** installed and running on your computer.
+* **Google Chrome** or **Mozilla Firefox**.
 
-- [What it does](#what-it-does)
-- [Supported sites](#supported-sites)
-- [Requirements](#requirements)
-- [Installation](#installation)
-    - [Firefox Add-ons](#firefox-add-ons)
-    - [Chrome Extension](#chrome-extension)
-- [Project structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+## Supported Anime Sites
 
-## What it does
+* anikototv.to
+* anikoto.cz
+* aniwaves.ru
+* animepahe.pw (and its other links)
 
-- Detects the current anime title, episode, and cover art.
-- Tracks playback state such as watching, paused, or stopped.
-- Updates Discord Rich Presence automatically through a local host process.
+---
 
-## Supported sites
+## How to Set It Up
 
-- anikototv.to
-- anikoto.cz
-- aniwaves.ru
-- animepahe.pw (and it's aliases)
+To make the magic happen, you need to install two things: the **Desktop App** and the **Browser Extension**.
 
-## Requirements
+### Step 1: Install the Desktop App
 
-- Discord desktop app installed and running.
-- A supported Chromium-based browser or Firefox.
-- Bun installed to run the local host manually.
+1. Go to our [Releases page](https://github.com/minkxx/anime-discord-rpc/releases).
+2. Download the file named `anime-rpc-desktop-1.0.0.Setup.exe`.
+3. Double-click the downloaded file to install it.
+4. Open the app and let it run in the background!
 
-## Installation
+### Step 2: Install the Browser Extension
 
-Pick the browser-specific install path below.
+**If you use Firefox:**
+It's super easy! Just go to the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/anikoto-discord-rpc/) and click **"Add to Firefox"**.
 
-### Firefox Add-ons
+**If you use Chrome:**
+We aren't in the Chrome Web Store just yet, so follow these simple steps (or watch this [quick demo video](https://ik.imagekit.io/9huvu1bd5/rpc-chrome-demo.mp4)):
 
-Install the extension from the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/anikoto-discord-rpc/) and set up the host the same way as above:
+1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-1.3.0-chrome.zip`.
+2. **Extract (unzip)** that file into a regular folder on your computer.
+3. Open Google Chrome and type `chrome://extensions` into the top web address bar and press Enter.
+4. Look at the top-right corner of the screen and turn **ON** the switch for **Developer mode**.
+5. Click the **Load unpacked** button that appears on the top left.
+6. Select the folder you just unzipped. You're done!
 
-1. Open the Firefox Add-ons Store and install the [Anime Discord RPC extension](https://addons.mozilla.org/en-US/firefox/addon/anikoto-discord-rpc/).
-2. Download `host-x.x.x.zip` from the [latest releases page](https://github.com/minkxx/anime-discord-rpc/releases) and extract it to a folder on your computer.
-3. Open a terminal in the extracted host folder and run `bun install`.
-4. Open `host/start-rpc.vbs` and replace the `path_to_index.ts` path with the full path to your local `host/index.ts` file.
-5. Copy `start-rpc.vbs` into your Windows Startup folder by pressing `Win + R`, typing `shell:startup`, and pasting the file there.
-6. Double-click `start-rpc.vbs` to start the host, or restart your computer so Windows launches it automatically.
+*That's it! Open one of the supported anime websites, start an episode, and check your Discord profile!*
 
-Once both the extension and host are running, open a supported anime site and Discord Rich Presence will update automatically.
+---
+### Step 3: If you want to avoid Step 1
 
-### Chrome Extension
+1. Download `host-1.0.0.zip` from the [latest releases page](https://github.com/minkxx/anime-discord-rpc/releases) and extract it.
+2. Open a terminal in the extracted folder and run `bun install`.
+3. Open `host/start-rpc.vbs` and replace the `path_to_index.ts` path with the full path to your local `host/index.ts` file.
+4. Press `Win + R`, type `shell:startup`, and press Enter to open your Windows Startup folder.
+5. Copy `start-rpc.vbs` into the Startup folder.
+6. Double-click `start-rpc.vbs` to start the host (it will now also start automatically when you turn on your PC).
 
-[![Chrome Demo](https://ik.imagekit.io/9huvu1bd5/rpc-chrome-demo.mp4)](https://ik.imagekit.io/9huvu1bd5/rpc-chrome-demo.mp4)
+---
 
-Download the Chrome package and set it up manually with the same host steps:
+## Project Structure
 
-1. Download `host-x.x.x.zip` and `anime-rpc-x.x.x-chrome.zip` from the [latest releases page](https://github.com/minkxx/anime-discord-rpc/releases).
-2. Extract `host-x.x.x.zip` to a folder on your computer.
-3. Open a terminal in the extracted host folder and run `bun install`.
-4. Open `host/start-rpc.vbs` and replace the `path_to_index.ts` path with the full path to your local `host/index.ts` file.
-5. Copy `start-rpc.vbs` into your Windows Startup folder by pressing `Win + R`, typing `shell:startup`, and pasting the file there.
-6. Double-click `start-rpc.vbs` to start the host, or restart your computer so Windows launches it automatically.
-7. Extract `anime-rpc-x.x.x-chrome.zip` to a folder on your computer.
-8. Open `chrome://extensions` in Chrome.
-9. Enable Developer mode.
-10. Click Load unpacked and select the extracted extension folder.
+* `extension/` - The code for the browser extension.
+* `host/` - The code for the script-based local bridge.
+* `desktop-app/` - The code for the Electron desktop application.
 
-After both parts are set up, the extension will send playback updates to the local host and Discord Rich Presence will update automatically.
+## Helping Out
 
-> [!WARNING]
-> 
-> Our extension is not available on the Chrome Web Store yet!
+Contributions are always welcome! If you want to add a new anime site or fix a bug, please read our [Contributing Guidelines](/CONTRIBUTING.md) to learn how to set up the project and open a Pull Request.
 
-## Project structure
+## 📜 License
 
-- extension/ contains the browser extension built with WXT.
-- host/ contains the local Discord RPC bridge.
+[MIT License](https://www.google.com/search?q=/LICENSE)
 
-## Contributing
-
-Contributions are always welcome! Whether it's adding support for a new anime site, fixing a bug, or improving the code, we'd love your help.
-
-Please read our [Contributing Guidelines](CONTRIBUTING.md) to learn how to set up the project locally, submit bug reports, or open a Pull Request.
-
-## License
-
-[MIT License](/LICENSE)
-
-Made with ❤️ by a weeb, for the weebs.
+<p align="center">Made with ❤️ by Minkxx</p>
