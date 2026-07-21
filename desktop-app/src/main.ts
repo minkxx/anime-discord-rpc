@@ -42,15 +42,28 @@ console.error = (...args) => {
 const gotTheLock = app.requestSingleInstanceLock();
 if (!gotTheLock) {
 	app.quit();
+	process.exit(0);
+} else {
+	app.on("second-instance", () => {
+		if (mainWindow) {
+			if (mainWindow.isMinimized()) {
+				mainWindow.restore();
+			}
+			if (!mainWindow.isVisible()) {
+				mainWindow.show();
+			}
+			mainWindow.focus();
+		}
+	});
 }
 
 if (started) {
 	app.quit();
 }
 
-const iconPath = path.join(__dirname, "../../assets/icon.ico");
-
-console.log("Icon path: ", iconPath);
+const iconPath = app.isPackaged
+	? path.join(process.resourcesPath, "icon.ico")
+	: path.join(__dirname, "../../assets/icon.ico");
 
 const createWindow = () => {
 	mainWindow = new BrowserWindow({
