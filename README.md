@@ -84,6 +84,6 @@ Contributions are always welcome! If you want to add a new anime site or fix a b
 
 ## 📜 License
 
-[MIT License](https://www.google.com/search?q=/LICENSE)
+[MIT License](/LICENSE)
 
 <p align="center">Made with ❤️ by Minkxx</p>
