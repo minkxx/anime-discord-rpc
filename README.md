@@ -49,7 +49,7 @@ To make the magic happen, you need to install two things: the **Desktop App** an
 It's super easy! Just go to the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/anikoto-discord-rpc/) and click **"Add to Firefox"**.
 
 **If you use Chrome:**
-We aren't in the Chrome Web Store just yet, so follow these simple steps (or watch this [quick demo video](https://ik.imagekit.io/9huvu1bd5/rpc-chrome-demo.mp4)):
+We aren't in the Chrome Web Store just yet, so follow these simple steps:
 
 1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-1.3.0-chrome.zip`.
 2. **Extract (unzip)** that file into a regular folder on your computer.
