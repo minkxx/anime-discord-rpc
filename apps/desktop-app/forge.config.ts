@@ -16,6 +16,8 @@ const config: ForgeConfig = {
 	rebuildConfig: {},
 	makers: [
 		new MakerSquirrel({
+			name: 'anime_rpc_desktop',
+			description: "A desktop application to receive anime data from browser extension and send rpc updates to local discord client.",
 			setupIcon: "./assets/icon.ico",
 			iconUrl:
 				"https://raw.githubusercontent.com/minkxx/anime-discord-rpc/refs/heads/main/apps/desktop-app/assets/icon.ico",
