@@ -61,22 +61,6 @@ We aren't in the Chrome Web Store just yet, so follow these simple steps:
 *That's it! Open one of the supported anime websites, start an episode, and check your Discord profile!*
 
 ---
-### Step 3: If you want to avoid Step 1
-
-1. Download `host-1.0.0.zip` from the [latest releases page](https://github.com/minkxx/anime-discord-rpc/releases) and extract it.
-2. Open a terminal in the extracted folder and run `bun install`.
-3. Open `host/start-rpc.vbs` and replace the `path_to_index.ts` path with the full path to your local `host/index.ts` file.
-4. Press `Win + R`, type `shell:startup`, and press Enter to open your Windows Startup folder.
-5. Copy `start-rpc.vbs` into the Startup folder.
-6. Double-click `start-rpc.vbs` to start the host (it will now also start automatically when you turn on your PC).
-
----
-
-## Project Structure
-
-* `extension/` - The code for the browser extension.
-* `host/` - The code for the script-based local bridge.
-* `desktop-app/` - The code for the Electron desktop application.
 
 ## Helping Out
 
