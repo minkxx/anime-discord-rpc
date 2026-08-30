@@ -4,16 +4,7 @@
   "scripts": {
     "typecheck": "pnpm -r run typecheck",
     "check": "pnpm -r run check",
-		"check:fix": "pnpm -r run check:fix",
-    "dev:desktop": "pnpm --filter @app/desktop run start",
-    "package:desktop": "pnpm --filter @app/desktop run package",
-    "make:desktop": "pnpm --filter @app/desktop run make",
-    "dev:chrome": "pnpm --filter @app/extension run dev:chrome",
-		"dev:firefox": "pnpm --filter @app/extension run dev:firefox",
-		"build:chrome": "pnpm --filter @app/extension run build:chrome",
-		"build:firefox": "pnpm --filter @app/extension run build:firefox",
-		"zip:chrome": "pnpm --filter @app/extension run zip:chrome",
-		"zip:firefox": "pnpm --filter @app/extension run zip:firefox"
+		"check:fix": "pnpm -r run check:fix"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.11",
