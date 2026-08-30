@@ -18,7 +18,7 @@ const config: ForgeConfig = {
 		new MakerSquirrel({
 			setupIcon: "./assets/icon.ico",
 			iconUrl:
-				"https://raw.githubusercontent.com/minkxx/anime-discord-rpc/refs/heads/main/desktop-app/assets/icon.ico",
+				"https://raw.githubusercontent.com/minkxx/anime-discord-rpc/refs/heads/main/apps/desktop-app/assets/icon.ico",
 		}),
 		new MakerZIP({}, ["darwin"]),
 		new MakerRpm({}),

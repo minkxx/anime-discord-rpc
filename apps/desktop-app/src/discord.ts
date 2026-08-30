@@ -1,5 +1,5 @@
 import { Client } from "@xhayper/discord-rpc";
-import { IPayload } from "./types";
+import type { IPayload } from "./types";
 
 const CLIENT_ID = "1526911509878538340";
 

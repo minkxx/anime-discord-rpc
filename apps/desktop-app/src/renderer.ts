@@ -1,5 +1,5 @@
 import "./index.css";
-import { IPayload } from "./types";
+import type { IPayload } from "./types";
 
 declare global {
 	interface Window {
