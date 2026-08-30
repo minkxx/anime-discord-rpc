@@ -20,7 +20,7 @@ Closes #<!-- insert issue number here -->
 ## Checklist:
 <!-- Go over all the following points, and put an `x` in all the boxes that apply. -->
 - [ ] My code follows the style guidelines of this project.
-- [ ] I have run `bun run check` (or the equivalent package manager command) and resolved any Biome formatting/linting errors.
+- [ ] I have run `pnpm run check` (or the equivalent package manager command) and resolved any Biome formatting/linting errors.
 - [ ] I have performed a self-review of my own code.
 - [ ] I have commented my code, particularly in hard-to-understand areas or when using complex DOM selectors.
 - [ ] My changes generate no new warnings or errors in the browser console.
