@@ -17,54 +17,39 @@ We use GitHub issues to track feature requests and bugs. Before opening a new is
 
 ## Local Development Setup
 
-Anime Discord RPC is split into three modular components:
+Anime Discord RPC is split into two modular components:
 
-1. **Browser Extension (`/extension`):** Built with WXT, this monitors DOM changes on anime sites.
-2. **Desktop Application (`/desktop-app`):** Built with Electron and Vite, this acts as the primary background middleware, hosting the WebSocket server and bridging data to Discord via `@xhayper/discord-rpc`.
-3. **Standalone Host (`/host`):** A lightweight, script-based alternative to the desktop application for advanced users.
+1. **[Browser Extension](/apps/extension/):** Built with WXT, this monitors DOM changes on anime sites.
+2. **[Desktop Application](/apps/desktop-app/):** Built with Electron and Vite, this acts as the primary background middleware, hosting the WebSocket server and bridging data to Discord via `@xhayper/discord-rpc`.
 
 ### Prerequisites
 
 * [Node.js](https://nodejs.org/) (Required for all environments)
-* [Bun](https://bun.sh/) (Our preferred package manager and task runner)
+* [Pnpm](https://pnpm.io/) (Our preferred package manager and task runner)
 
-### 1. Extension Setup (`/extension`)
+### 1. Extension Setup (`apps/extension`)
 
 The browser extension handles DOM scraping and sends payloads to the local WebSocket server.
 
-1. Navigate to the extension directory: `cd extension`
-2. Install dependencies: `bun install`
-3. Run the development server:
-* For Chrome: `bun run dev`
-* For Firefox: `bun run dev:firefox`
+Run the development server:
+* For Chrome: `pnpm dev:chrome`
+* For Firefox: `pnpm dev:firefox`
 
-### 2. Desktop App Setup (`/desktop-app`)
+### 2. Desktop App Setup (`apps/desktop-app`)
 
 This is the primary middleware application. It receives WebSocket data on port `8080` and manages the Discord Rich Presence connection.
 
-1. Navigate to the desktop app directory: `cd desktop-app`
-2. Install dependencies: `bun install`
-3. Start the development server (with hot-reloading): `bun run start`
-4. Package the application into an `.exe` installer: `bun run make`
-5. Run code formatting and linting: `bun run check` (or `bun run check:fix` to apply changes)
-
-### 3. Standalone Host Setup (`/host`)
-
-If you are developing for the lightweight script runner instead of the Electron app:
-
-1. Navigate to the host directory: `cd host`
-2. Install dependencies: `bun install`
-3. Start the local RPC server: `bun run index.ts`
-
----
+1. Start the development server (with hot-reloading): `pnpm dev:desktop`
+2. Package the application into an `.exe` installer: `pnpm make:desktop`
+3. Run code formatting and linting: `pnpm check` (or `pnpm check:fix` to apply changes)
 
 ## Adding Support for a New Site
 
 We use a modular **Strategy Pattern** to support different streaming sites. This ensures that adding a new site does not clutter or break the core extension logic.
 
-1. Create a new TypeScript file inside `extension/strategies/` (e.g., `crunchyroll.ts`).
+1. Create a new TypeScript file inside `apps/extension/strategies/` (e.g., `crunchyroll.ts`).
 2. Implement the `AnimeSite` interface. You will need to provide the target domains and the specific DOM scraping logic (title, episode, cover image, and playback state).
-3. Export your new strategy and append it to the array in `extension/strategies/index.ts`.
+3. Export your new strategy and append it to the array in `apps/extension/strategies/index.ts`.
 
 ---
 
@@ -72,11 +57,11 @@ We use a modular **Strategy Pattern** to support different streaming sites. This
 
 When you are ready to submit your code, please follow these steps to ensure a smooth review process:
 
-1. **Format your code:** We use Biome for linting and code formatting to maintain consistency. Run `bun run check:fix` in the respective directories (`/desktop-app`, `/extension`, or `/host`) before committing.
+1. **Format your code:** We use Biome for linting and code formatting to maintain consistency. Run `pnpm check:fix` before committing.
 2. **Test your changes locally:**
 * Ensure the extension loads cleanly as an unpacked extension.
 * Verify the WebSocket connection succeeds.
-* Ensure the desktop app launches, connects to Discord, and packages successfully (`bun run make`) without native dependency errors.
+* Ensure the desktop app launches, connects to Discord, and packages successfully (`pnpm make:desktop`) without native dependency errors.
 
 
 3. **Submit the PR:** Fill out the Pull Request template comprehensively. If your PR resolves an open issue, link to it using keywords (e.g., `Closes #12`).
