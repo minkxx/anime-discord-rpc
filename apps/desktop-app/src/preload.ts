@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { IPayload } from "./types";
+import type { IPayload } from "./types";
 
 contextBridge.exposeInMainWorld("api", {
 	onAnimeUpdate: (callback: (data: IPayload) => void) => {

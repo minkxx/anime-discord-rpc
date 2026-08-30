@@ -5,7 +5,7 @@ const CLIENT_ID = "1526911509878538340";
 
 export class DiscordManager {
 	private client: Client;
-	private isConnected = false;
+	public isConnected = false;
 	private reconnectTimeout: ReturnType<typeof setTimeout> | null = null;
 	private retryDelay = 5000;
 	private activityTimeout: ReturnType<typeof setTimeout> | null = null;

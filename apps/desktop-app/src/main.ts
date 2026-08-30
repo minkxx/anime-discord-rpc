@@ -3,7 +3,7 @@ import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
 import started from "electron-squirrel-startup";
 import { WebSocketServer } from "ws";
 import { DiscordManager } from "./discord";
-import { IPayload } from "./types";
+import type { IPayload } from "./types";
 
 let mainWindow: BrowserWindow | null = null;
 let tray: Tray | null = null;
@@ -17,7 +17,7 @@ let isQuitting = false;
 const originalLog = console.log;
 const originalError = console.error;
 
-function sendLogToWindow(level: "info" | "error", args: any[]) {
+function sendLogToWindow(level: "info" | "error", args: unknown[]) {
 	if (mainWindow && !mainWindow.isDestroyed()) {
 		const message = args
 			.map((arg) => (typeof arg === "object" ? JSON.stringify(arg) : arg))

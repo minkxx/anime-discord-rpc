@@ -1,0 +1,11 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+allowBuilds:
+  electron-winstaller: true
+  esbuild: true
+  spawn-sync: true
+
+blockExoticSubdeps: false # allows pnpm to install node-gyp from github
+nodeLinker: "hoisted" 

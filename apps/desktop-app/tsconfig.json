@@ -10,5 +10,6 @@
 		"outDir": "dist",
 		"moduleResolution": "Bundler",
 		"resolveJsonModule": true
-	}
+	},
+	"include": ["src/**/*", "forge.config.ts", "vite.*.config.ts"]
 }

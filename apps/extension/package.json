@@ -1,0 +1,21 @@
+{
+	"name": "anime-rpc-extension",
+	"private": true,
+	"version": "1.3.1",
+	"type": "module",
+	"scripts": {
+		"dev:chrome": "wxt",
+		"dev:firefox": "wxt -b firefox",
+		"build:chrome": "wxt build",
+		"build:firefox": "wxt build -b firefox",
+		"zip:chrome": "wxt zip",
+		"zip:firefox": "wxt zip -b firefox",
+		"typecheck": "tsc --noEmit",
+		"check": "biome check",
+		"check:fix": "biome check --write"
+	},
+	"devDependencies": {
+		"vite": "^8.2.2",
+		"wxt": "^0.21.4"
+	}
+}
