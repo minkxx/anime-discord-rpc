@@ -12,7 +12,7 @@ Ever wanted your Discord status to show exactly which anime and episode you are 
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v1.3.0-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v1.3.1-blue?style=flat&labelColor=#808080)
 
 </div>
 
@@ -39,7 +39,7 @@ To make the magic happen, you need to install two things: the **Desktop App** an
 ### Step 1: Install the Desktop App
 
 1. Go to our [Releases page](https://github.com/minkxx/anime-discord-rpc/releases).
-2. Download the file named `anime-rpc-desktop-1.0.0.Setup.exe`.
+2. Download the file named `anime-rpc-desktop-1.0.1.Setup.exe`.
 3. Double-click the downloaded file to install it.
 4. Open the app and let it run in the background!
 
@@ -51,7 +51,7 @@ It's super easy! Just go to the [Firefox Add-ons Store](https://addons.mozilla.o
 **If you use Chrome:**
 We aren't in the Chrome Web Store just yet, so follow these simple steps:
 
-1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-1.3.0-chrome.zip`.
+1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-1.3.1-chrome.zip`.
 2. **Extract (unzip)** that file into a regular folder on your computer.
 3. Open Google Chrome and type `chrome://extensions` into the top web address bar and press Enter.
 4. Look at the top-right corner of the screen and turn **ON** the switch for **Developer mode**.
