@@ -12,6 +12,8 @@ let discordManager: DiscordManager | null = null;
 
 let isBrowserConnected = false;
 
+let isQuitting = false;
+
 const originalLog = console.log;
 const originalError = console.error;
 
@@ -88,8 +90,10 @@ const createWindow = () => {
 	}
 
 	mainWindow.on("close", (event) => {
-		event.preventDefault();
-		mainWindow?.hide();
+		if (!isQuitting) {
+			event.preventDefault();
+			mainWindow?.hide();
+		}
 	});
 };
 
@@ -195,4 +199,8 @@ app.on("activate", () => {
 	if (BrowserWindow.getAllWindows().length === 0) {
 		createWindow();
 	}
+});
+
+app.on("before-quit", () => {
+	isQuitting = true;
 });
