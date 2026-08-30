@@ -14,7 +14,7 @@ export default defineBackground(() => {
 	let activityTimeout: ReturnType<typeof setTimeout> | null = null;
 	let reconnectDelay = 5000;
 
-	let currentAnimeState = {
+	const currentAnimeState = {
 		title: "Unknown",
 		episode: "Unknown",
 		coverUrl: "",
@@ -51,7 +51,7 @@ export default defineBackground(() => {
 	connect();
 
 	browser.runtime.onMessage.addListener((message, sender) => {
-		if (!sender.tab || !sender.tab.active) return;
+		if (!sender.tab?.active) return;
 
 		if (message.type === "STOPPED") {
 			sendToHost({ type: "STOPPED" });

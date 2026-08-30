@@ -43,7 +43,7 @@ export const animepaheStrategy: AnimeSite = {
 					anilistId: anilistId,
 				})
 				.then((response: { coverUrl: string }) => {
-					if (response && response.coverUrl) {
+					if (response?.coverUrl) {
 						cachedCoverUrl = response.coverUrl;
 					} else {
 						fetchFailed = true;
