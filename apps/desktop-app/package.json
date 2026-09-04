@@ -2,7 +2,7 @@
 	"name": "anime-rpc-desktop",
 	"productName": "anime-rpc-desktop",
 	"private": true,
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"main": ".vite/build/main.js",
 	"author": "minkxx",
 	"scripts": {
