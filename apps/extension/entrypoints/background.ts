@@ -1,13 +1,5 @@
+import type { PlaybackState } from "@pkg/shared";
 import { fetchAnilistCover } from "../utils/anilist";
-
-interface IPayload {
-	type?: "WATCHING" | "PAUSED" | "STOPPED";
-	title?: string;
-	episode?: string;
-	coverUrl?: string;
-	currentMs?: number;
-	durationMs?: number;
-}
 
 export default defineBackground(() => {
 	let ws: WebSocket | null = null;
@@ -37,7 +29,7 @@ export default defineBackground(() => {
 		};
 	}
 
-	function sendToHost(payload: IPayload) {
+	function sendToHost(payload: PlaybackState) {
 		if (ws?.readyState === WebSocket.OPEN) {
 			ws.send(JSON.stringify(payload));
 		}
