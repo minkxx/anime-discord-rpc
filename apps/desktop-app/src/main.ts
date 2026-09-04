@@ -1,6 +1,7 @@
+import fs from "node:fs";
 import path from "node:path";
 import type { PlaybackState } from "@pkg/shared";
-import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import started from "electron-squirrel-startup";
 import { WebSocketServer } from "ws";
 import { DiscordManager } from "./discord";
@@ -11,8 +12,9 @@ let wss: WebSocketServer | null = null;
 let discordManager: DiscordManager | null = null;
 
 let isBrowserConnected = false;
-
 let isQuitting = false;
+
+let rpcEnabled = true;
 
 const originalLog = console.log;
 const originalError = console.error;
@@ -67,10 +69,37 @@ const iconPath = app.isPackaged
 	? path.join(process.resourcesPath, "icon.ico")
 	: path.join(__dirname, "../../assets/icon.ico");
 
-const createWindow = () => {
+const firstRunMarkerPath = path.join(
+	app.getPath("userData"),
+	".first-run-complete",
+);
+
+const isFirstRun = () => !fs.existsSync(firstRunMarkerPath);
+
+const markFirstRunComplete = () => {
+	try {
+		fs.writeFileSync(firstRunMarkerPath, String(Date.now()));
+	} catch (err) {
+		console.error("Failed to write first-run marker:", err);
+	}
+};
+
+const AUTOSTART_ARG = "--autostart";
+
+const wasLaunchedAtLogin = (): boolean => {
+	if (process.argv.includes(AUTOSTART_ARG)) return true;
+
+	if (process.platform === "darwin") {
+		return app.getLoginItemSettings().wasOpenedAtLogin;
+	}
+
+	return false;
+};
+
+const createWindow = (showOnReady: boolean) => {
 	mainWindow = new BrowserWindow({
 		width: 400,
-		height: 550,
+		height: 580,
 		show: false,
 		resizable: false,
 		icon: iconPath,
@@ -80,6 +109,12 @@ const createWindow = () => {
 	});
 
 	mainWindow.setMenu(null);
+
+	mainWindow.once("ready-to-show", () => {
+		if (showOnReady) {
+			mainWindow?.show();
+		}
+	});
 
 	if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
 		mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
@@ -109,7 +144,13 @@ const updateTrayMenu = () => {
 			enabled: false,
 		},
 		{
-			label: `Discord: ${discordManager.isConnected ? "🟢 Connected" : "🔴 Disconnected"}`,
+			label: `Discord: ${
+				rpcEnabled
+					? discordManager.isConnected
+						? "🟢 Connected"
+						: "🔴 Disconnected"
+					: "⏸ Paused"
+			}`,
 			enabled: false,
 		},
 		{ type: "separator" },
@@ -150,7 +191,9 @@ const initWebSocket = () => {
 					mainWindow.webContents.send("anime-update", data);
 				}
 
-				discordManager?.updatePresence(data);
+				if (rpcEnabled) {
+					discordManager?.updatePresence(data);
+				}
 
 				updateTrayMenu();
 			} catch (err) {
@@ -166,8 +209,29 @@ const initWebSocket = () => {
 				mainWindow.webContents.send("anime-update", { type: "STOPPED" });
 			}
 
-			discordManager?.updatePresence({ type: "STOPPED" });
+			if (rpcEnabled) {
+				discordManager?.updatePresence({ type: "STOPPED" });
+			}
 		});
+	});
+};
+
+const initIpcHandlers = () => {
+	ipcMain.handle("get-app-version", () => app.getVersion());
+
+	ipcMain.handle("get-rpc-enabled", () => rpcEnabled);
+
+	ipcMain.on("set-rpc-enabled", (_event, enabled: boolean) => {
+		rpcEnabled = enabled;
+		console.log(
+			`Discord status updates ${enabled ? "enabled" : "paused"} from Settings.`,
+		);
+
+		if (!rpcEnabled) {
+			discordManager?.updatePresence({ type: "STOPPED" });
+		}
+
+		updateTrayMenu();
 	});
 };
 
@@ -175,20 +239,26 @@ app.on("ready", () => {
 	app.setLoginItemSettings({
 		openAtLogin: true,
 		path: app.getPath("exe"),
+		args: [AUTOSTART_ARG],
 	});
 
 	discordManager = new DiscordManager();
 
-	createWindow();
+	const firstRun = isFirstRun();
+	const shouldShow = firstRun || !wasLaunchedAtLogin();
+
+	createWindow(shouldShow);
 	createTray();
 	initWebSocket();
+	initIpcHandlers();
+
+	if (firstRun) {
+		markFirstRunComplete();
+	}
 
 	setInterval(updateTrayMenu, 6000);
 });
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
 	if (process.platform !== "darwin") {
 		app.quit();
@@ -196,10 +266,8 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-	// On OS X it's common to re-create a window in the app when the
-	// dock icon is clicked and there are no other windows open.
 	if (BrowserWindow.getAllWindows().length === 0) {
-		createWindow();
+		createWindow(true);
 	}
 });
 
