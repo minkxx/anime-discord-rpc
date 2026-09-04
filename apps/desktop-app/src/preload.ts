@@ -1,8 +1,8 @@
+import type { PlaybackState } from "@pkg/shared";
 import { contextBridge, ipcRenderer } from "electron";
-import type { IPayload } from "./types";
 
 contextBridge.exposeInMainWorld("api", {
-	onAnimeUpdate: (callback: (data: IPayload) => void) => {
+	onAnimeUpdate: (callback: (data: PlaybackState) => void) => {
 		ipcRenderer.on("anime-update", (_event, data) => callback(data));
 	},
 

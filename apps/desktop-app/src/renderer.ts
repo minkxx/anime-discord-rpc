@@ -1,10 +1,10 @@
 import "./index.css";
-import type { IPayload } from "./types";
+import type { PlaybackState } from "@pkg/shared";
 
 declare global {
 	interface Window {
 		api: {
-			onAnimeUpdate: (callback: (data: IPayload) => void) => void;
+			onAnimeUpdate: (callback: (data: PlaybackState) => void) => void;
 			onAppLog: (
 				callback: (log: {
 					level: string;
