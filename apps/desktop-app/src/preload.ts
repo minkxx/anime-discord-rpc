@@ -15,4 +15,12 @@ contextBridge.exposeInMainWorld("api", {
 	) => {
 		ipcRenderer.on("app-log", (_event, log) => callback(log));
 	},
+
+	getAppVersion: (): Promise<string> => ipcRenderer.invoke("get-app-version"),
+
+	getRpcEnabled: (): Promise<boolean> => ipcRenderer.invoke("get-rpc-enabled"),
+
+	setRpcEnabled: (enabled: boolean) => {
+		ipcRenderer.send("set-rpc-enabled", enabled);
+	},
 });
