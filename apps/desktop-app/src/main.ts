@@ -1,9 +1,9 @@
 import path from "node:path";
+import type { PlaybackState } from "@pkg/shared";
 import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
 import started from "electron-squirrel-startup";
 import { WebSocketServer } from "ws";
 import { DiscordManager } from "./discord";
-import type { IPayload } from "./types";
 
 let mainWindow: BrowserWindow | null = null;
 let tray: Tray | null = null;
@@ -93,6 +93,8 @@ const createWindow = () => {
 		if (!isQuitting) {
 			event.preventDefault();
 			mainWindow?.hide();
+		} else {
+			app.quit();
 		}
 	});
 };
@@ -142,7 +144,7 @@ const initWebSocket = () => {
 
 		ws.on("message", (message) => {
 			try {
-				const data = JSON.parse(message.toString());
+				const data: PlaybackState = JSON.parse(message.toString());
 
 				if (mainWindow) {
 					mainWindow.webContents.send("anime-update", data);
@@ -164,7 +166,7 @@ const initWebSocket = () => {
 				mainWindow.webContents.send("anime-update", { type: "STOPPED" });
 			}
 
-			discordManager?.updatePresence({ type: "STOPPED" } as IPayload);
+			discordManager?.updatePresence({ type: "STOPPED" });
 		});
 	});
 };

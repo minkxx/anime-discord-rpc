@@ -1,5 +1,5 @@
+import type { PlaybackState } from "@pkg/shared";
 import { Client } from "@xhayper/discord-rpc";
-import type { IPayload } from "./types";
 
 const CLIENT_ID = "1526911509878538340";
 
@@ -52,7 +52,7 @@ export class DiscordManager {
 		}, this.retryDelay);
 	}
 
-	public updatePresence(payload: IPayload) {
+	public updatePresence(payload: PlaybackState) {
 		if (!this.isConnected || !this.client.user) {
 			console.log(
 				"RPC received data, but Discord is not connected. Skipping update.",
