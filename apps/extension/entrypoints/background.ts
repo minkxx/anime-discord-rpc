@@ -1,11 +1,12 @@
-import type { PlaybackState } from "@pkg/shared";
+import { loginWithDiscord } from "../discord/auth";
+import { DiscordGateway } from "../discord/gateway";
 import { fetchAnilistCover } from "../utils/anilist";
 
 export default defineBackground(() => {
-	let ws: WebSocket | null = null;
-	let activityTimeout: ReturnType<typeof setTimeout> | null = null;
-	let reconnectDelay = 5000;
+	const gateway = new DiscordGateway();
+	gateway.connect();
 
+	let activityTimeout: ReturnType<typeof setTimeout> | null = null;
 	const currentAnimeState = {
 		title: "Unknown",
 		episode: "Unknown",
@@ -15,49 +16,66 @@ export default defineBackground(() => {
 		isPaused: false,
 	};
 
-	function connect() {
-		ws = new WebSocket("ws://127.0.0.1:8080");
-
-		ws.onopen = () => {
-			console.log("Background Worker connected to local RPC server");
-			reconnectDelay = 5000;
-		};
-
-		ws.onclose = () => {
-			setTimeout(connect, reconnectDelay);
-			reconnectDelay = Math.min(reconnectDelay * 1.5, 30000);
-		};
-	}
-
-	function sendToHost(payload: PlaybackState) {
-		if (ws?.readyState === WebSocket.OPEN) {
-			ws.send(JSON.stringify(payload));
-		}
-	}
-
 	function resetActivityTimeout() {
 		if (activityTimeout) clearTimeout(activityTimeout);
-		activityTimeout = setTimeout(() => sendToHost({ type: "STOPPED" }), 10000);
+		activityTimeout = setTimeout(() => {
+			gateway.setActivity({ type: "STOPPED", ...currentAnimeState });
+		}, 10000);
 	}
 
-	connect();
+	browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+		// auth handlers
+		if (message.type === "LOGIN_DISCORD") {
+			loginWithDiscord()
+				.then(async (token) => {
+					if (token) {
+						await gateway.connect();
+						sendResponse({ success: true });
+					} else {
+						sendResponse({ success: false, error: "Failed to obtain token." });
+					}
+				})
+				.catch((err) => {
+					sendResponse({ success: false, error: err.message });
+				});
+			return true;
+		}
 
-	browser.runtime.onMessage.addListener((message, sender) => {
+		if (message.type === "LOGOUT_DISCORD") {
+			gateway.disconnect();
+			browser.storage.local.remove("discord_token").then(() => {
+				sendResponse({ success: true });
+			});
+			return true;
+		}
+
+		if (message.type === "GET_STATUS") {
+			browser.storage.local.get("discord_token").then((storage) => {
+				sendResponse({
+					hasToken:
+						typeof storage.discord_token === "string" &&
+						!!storage.discord_token,
+					isGatewayReady: gateway.isConnected(),
+					currentAnime: currentAnimeState,
+				});
+			});
+			return true;
+		}
+
+		// content.ts handlers
 		if (!sender.tab?.active) return;
 
 		if (message.type === "STOPPED") {
-			sendToHost({ type: "STOPPED" });
+			gateway.setActivity({ type: "STOPPED", ...currentAnimeState });
 			if (activityTimeout) clearTimeout(activityTimeout);
 			return;
 		}
 
 		if (message.type === "FETCH_ANILIST") {
-			const coverUrl = fetchAnilistCover(message.anilistId).then(
-				(coverUrl) => ({
-					coverUrl,
-				}),
+			fetchAnilistCover(message.anilistId).then((coverUrl) =>
+				sendResponse({ coverUrl }),
 			);
-			return coverUrl;
+			return true;
 		}
 
 		if (message.type === "INFO_UPDATE") {
@@ -74,13 +92,11 @@ export default defineBackground(() => {
 
 		resetActivityTimeout();
 
-		sendToHost({
+		console.log(currentAnimeState);
+
+		gateway.setActivity({
 			type: currentAnimeState.isPaused ? "PAUSED" : "WATCHING",
-			title: currentAnimeState.title,
-			episode: currentAnimeState.episode,
-			coverUrl: currentAnimeState.coverUrl,
-			currentMs: currentAnimeState.currentMs,
-			durationMs: currentAnimeState.durationMs,
+			...currentAnimeState,
 		});
 	});
 });
