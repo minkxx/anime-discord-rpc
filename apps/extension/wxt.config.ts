@@ -6,7 +6,12 @@ import { extractMatches } from "./utils/extractor";
 export default defineConfig({
 	manifest: {
 		name: "Anime RPC",
-		host_permissions: extractMatches(strategies),
+		permissions: ["storage", "identity"],
+		host_permissions: [
+			...extractMatches(strategies),
+			"https://discord.com/*",
+			"wss://gateway.discord.gg/*",
+		],
 		browser_specific_settings: {
 			gecko: {
 				id: "anime-rpc@minkxx.dev",
@@ -24,4 +29,5 @@ export default defineConfig({
 			},
 		},
 	}),
+	modules: ["@wxt-dev/module-react"],
 });
