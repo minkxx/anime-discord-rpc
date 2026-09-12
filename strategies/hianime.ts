@@ -1,15 +1,15 @@
+import type { AnimeSite } from "../types";
 import { parseTimeText } from "../utils/parser";
-import type { AnimeSite } from "./types";
 
-export const aniwaveStrategy: AnimeSite = {
-	domains: ["aniwaves.ru"],
-	iframe_src: ["play.echovideo.ru", "gn1r5n.org", "myvidplay.com"],
+export const hianimeStrategy: AnimeSite = {
+	domains: ["hianime.at"],
+	iframe_src: ["zokoanime.video", "megaplay.buzz"],
 
 	getAnimeMetadata: () => {
-		const titleElement = document.querySelector("h1.title.d-title");
-		const episodeElement = document.querySelector(".tip b");
+		const titleElement = document.querySelector(".anisc-detail .film-name a");
+		const episodeElement = document.querySelector(".server-notice b");
 		const imageElement = document.querySelector(
-			"#w-info .binfo .poster img",
+			".anisc-poster .film-poster img",
 		) as HTMLImageElement;
 
 		const title = titleElement?.textContent?.trim();

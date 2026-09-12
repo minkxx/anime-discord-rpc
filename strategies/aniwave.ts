@@ -1,12 +1,12 @@
+import type { AnimeSite } from "../types";
 import { parseTimeText } from "../utils/parser";
-import type { AnimeSite } from "./types";
 
-export const anikotoStrategy: AnimeSite = {
-	domains: ["anikototv.to", "anikoto.cz"],
-	iframe_src: ["vidtube.site", "megaplay.buzz", "viswish.live"],
+export const aniwaveStrategy: AnimeSite = {
+	domains: ["aniwaves.ru"],
+	iframe_src: ["play.echovideo.ru", "gn1r5n.org", "myvidplay.com"],
 
 	getAnimeMetadata: () => {
-		const titleElement = document.querySelector("h1.title");
+		const titleElement = document.querySelector("h1.title.d-title");
 		const episodeElement = document.querySelector(".tip b");
 		const imageElement = document.querySelector(
 			"#w-info .binfo .poster img",

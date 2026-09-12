@@ -1,3 +1,4 @@
+import { CHECK_ACTIVITY_INTERVAL } from "../constants";
 import { strategies } from "../strategies";
 import { extractMatches } from "../utils/extractor";
 
@@ -45,6 +46,6 @@ export default defineContentScript({
 					coverUrl: meta.coverUrl || "No Image Found",
 				});
 			}
-		}, 5000);
+		}, CHECK_ACTIVITY_INTERVAL * 1000);
 	},
 });

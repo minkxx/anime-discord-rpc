@@ -1,4 +1,4 @@
-export const DISCORD_CLIENT_ID = "1526911509878538340";
+import { APPLICATION_ID } from "../constants";
 
 function generateCodeVerifier() {
 	const array = new Uint8Array(32);
@@ -28,7 +28,7 @@ export async function loginWithDiscord(): Promise<string | null> {
 		const challenge = await generateCodeChallenge(verifier);
 
 		const authUrl = new URL("https://discord.com/oauth2/authorize");
-		authUrl.searchParams.set("client_id", DISCORD_CLIENT_ID);
+		authUrl.searchParams.set("client_id", APPLICATION_ID);
 		authUrl.searchParams.set("response_type", "code");
 		authUrl.searchParams.set("redirect_uri", redirectUri);
 		authUrl.searchParams.set("scope", "openid sdk.social_layer_presence");
@@ -45,7 +45,7 @@ export async function loginWithDiscord(): Promise<string | null> {
 		if (!code) throw new Error("No authorization code returned.");
 
 		const body = new URLSearchParams({
-			client_id: DISCORD_CLIENT_ID,
+			client_id: APPLICATION_ID,
 			grant_type: "authorization_code",
 			code,
 			redirect_uri: redirectUri,

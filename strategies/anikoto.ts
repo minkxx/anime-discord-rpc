@@ -1,15 +1,15 @@
+import type { AnimeSite } from "../types";
 import { parseTimeText } from "../utils/parser";
-import type { AnimeSite } from "./types";
 
-export const hianimeStrategy: AnimeSite = {
-	domains: ["hianime.at"],
-	iframe_src: ["zokoanime.video", "megaplay.buzz"],
+export const anikotoStrategy: AnimeSite = {
+	domains: ["anikototv.to", "anikoto.cz"],
+	iframe_src: ["vidtube.site", "megaplay.buzz", "viswish.live"],
 
 	getAnimeMetadata: () => {
-		const titleElement = document.querySelector(".anisc-detail .film-name a");
-		const episodeElement = document.querySelector(".server-notice b");
+		const titleElement = document.querySelector("h1.title");
+		const episodeElement = document.querySelector(".tip b");
 		const imageElement = document.querySelector(
-			".anisc-poster .film-poster img",
+			"#w-info .binfo .poster img",
 		) as HTMLImageElement;
 
 		const title = titleElement?.textContent?.trim();

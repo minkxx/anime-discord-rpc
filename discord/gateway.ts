@@ -1,4 +1,6 @@
-import type { PlaybackState } from "@pkg/shared";
+import { getLargeImageKey } from "@/utils/register-assets";
+import { APPLICATION_ID, GATEWAY_RECONNECT_INTERVAL } from "../constants";
+import type { PlaybackState } from "../types";
 
 export class DiscordGateway {
 	private ws: WebSocket | null = null;
@@ -58,7 +60,7 @@ export class DiscordGateway {
 			this.stopHeartbeat();
 			if (!this.isManualDisconnect) {
 				console.log("[Gateway] Connection dropped. Reconnecting in 5s...");
-				setTimeout(() => this.connect(), 5000);
+				setTimeout(() => this.connect(), GATEWAY_RECONNECT_INTERVAL * 1000);
 			}
 		};
 	}
@@ -95,7 +97,7 @@ export class DiscordGateway {
 		);
 	}
 
-	public setActivity(
+	public async setActivity(
 		state: PlaybackState & {
 			title: string;
 			episode: string;
@@ -110,42 +112,46 @@ export class DiscordGateway {
 		const isStopped = state.type === "STOPPED";
 
 		let timestamps: { start?: number; end?: number } | undefined;
-
 		if (!state.isPaused && state.currentMs > 0 && state.durationMs > 0) {
 			const start = Math.floor(Date.now() - state.currentMs);
 			const end = Math.floor(start + state.durationMs);
 			timestamps = { start, end };
 		}
 
-		this.ws.send(
-			JSON.stringify({
-				op: 3,
-				d: {
-					since: null,
-					activities: isStopped
-						? []
-						: [
-								{
-									name: "Anime",
-									type: 3,
-									application_id: "1526911509878538340",
-									details: state.title,
-									state: `${state.episode} ${state.isPaused ? "(Paused)" : ""}`,
-									timestamps: timestamps,
-									assets: {
-										// large_image: state.coverUrl?.startsWith("http")
-										// 	? `external:${state.coverUrl}`
-										// 	: state.coverUrl || "default_image_key",
-										large_image: "default_anime_cover",
-										large_text: state.title,
-									},
+		const largeImage = state.coverUrl
+			? await getLargeImageKey(state.coverUrl)
+			: "default_cover";
+
+		const payload = {
+			op: 3,
+			d: {
+				since: null,
+				activities: isStopped
+					? []
+					: [
+							{
+								name: "Anime",
+								type: 3,
+								application_id: APPLICATION_ID,
+								details: state.title,
+								state: `${state.episode} ${state.isPaused ? "(Paused)" : ""}`,
+								timestamps,
+								assets: {
+									large_image: largeImage,
+									large_text: state.title,
 								},
-							],
-					status: "online",
-					afk: false,
-				},
-			}),
+							},
+						],
+				status: "online",
+				afk: false,
+			},
+		};
+
+		console.log(
+			"[Gateway] Sending presence payload:",
+			JSON.stringify(payload, null, 2),
 		);
+		this.ws.send(JSON.stringify(payload));
 	}
 
 	public disconnect() {

@@ -1,3 +1,4 @@
+import { RESET_ACTIVITY_TIMEOUT } from "../constants";
 import { loginWithDiscord } from "../discord/auth";
 import { DiscordGateway } from "../discord/gateway";
 import { fetchAnilistCover } from "../utils/anilist";
@@ -19,8 +20,10 @@ export default defineBackground(() => {
 	function resetActivityTimeout() {
 		if (activityTimeout) clearTimeout(activityTimeout);
 		activityTimeout = setTimeout(() => {
-			gateway.setActivity({ type: "STOPPED", ...currentAnimeState });
-		}, 10000);
+			gateway
+				.setActivity({ type: "STOPPED", ...currentAnimeState })
+				.catch((err) => console.error("[setActivity/timeout]", err));
+		}, RESET_ACTIVITY_TIMEOUT * 1000);
 	}
 
 	browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -66,7 +69,9 @@ export default defineBackground(() => {
 		if (!sender.tab?.active) return;
 
 		if (message.type === "STOPPED") {
-			gateway.setActivity({ type: "STOPPED", ...currentAnimeState });
+			gateway
+				.setActivity({ type: "STOPPED", ...currentAnimeState })
+				.catch((err) => console.error("[setActivity/stopped]", err));
 			if (activityTimeout) clearTimeout(activityTimeout);
 			return;
 		}
@@ -92,11 +97,11 @@ export default defineBackground(() => {
 
 		resetActivityTimeout();
 
-		console.log(currentAnimeState);
-
-		gateway.setActivity({
-			type: currentAnimeState.isPaused ? "PAUSED" : "WATCHING",
-			...currentAnimeState,
-		});
+		gateway
+			.setActivity({
+				type: currentAnimeState.isPaused ? "PAUSED" : "WATCHING",
+				...currentAnimeState,
+			})
+			.catch((err) => console.error("[setActivity/update]", err));
 	});
 });

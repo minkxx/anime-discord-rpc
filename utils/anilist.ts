@@ -5,7 +5,7 @@ export async function fetchAnilistCover(
         query ($id: Int) {
             Media (id: $id, type: ANIME) {
                 coverImage {
-                    medium
+                    extraLarge
                 }
             }
         }
@@ -25,7 +25,7 @@ export async function fetchAnilistCover(
 		});
 
 		const json = await res.json();
-		return json.data?.Media?.coverImage?.medium || null;
+		return json.data?.Media?.coverImage?.extraLarge || null;
 	} catch (error) {
 		console.error("AniList API Error:", error);
 		return null;

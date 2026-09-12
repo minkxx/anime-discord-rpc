@@ -1,5 +1,5 @@
+import type { AnimeSite } from "../types";
 import { parseTimeText } from "../utils/parser";
-import type { AnimeSite } from "./types";
 
 let cachedCoverUrl: string | null = null;
 let currentAnilistId: number | null = null;
