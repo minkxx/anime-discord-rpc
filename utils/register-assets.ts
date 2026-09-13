@@ -25,7 +25,6 @@ export async function registerExternalAsset(
 	}
 
 	const data = await res.json();
-	console.log("[ExternalAssets] raw response:", data);
 
 	const path = data?.[0]?.external_asset_path;
 	return path ? `mp:${path}` : null;
