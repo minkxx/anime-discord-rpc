@@ -44,6 +44,15 @@ export default defineBackground(() => {
 		}, RESET_ACTIVITY_TIMEOUT * 1000);
 	}
 
+	browser.runtime.onInstalled.addListener((details) => {
+		if (details.reason === "install") {
+			browser.tabs.create({
+				url: browser.runtime.getURL("/popup.html"),
+				active: true,
+			});
+		}
+	});
+
 	browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 		if (message.type === "LOGIN_DISCORD") {
 			loginWithDiscord()
