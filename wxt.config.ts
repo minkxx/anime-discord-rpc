@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "wxt";
 import { strategies } from "./strategies";
 import { extractMatches } from "./utils/extractor";
@@ -24,6 +25,7 @@ export default defineConfig({
 		},
 	},
 	vite: () => ({
+		plugins: [tailwindcss()],
 		server: {
 			fs: {
 				allow: ["../.."],
