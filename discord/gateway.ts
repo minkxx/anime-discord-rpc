@@ -1,6 +1,6 @@
-import { getLargeImageKey } from "@/utils/register-assets";
-import { APPLICATION_ID, GATEWAY_RECONNECT_INTERVAL } from "../constants";
+import { APPLICATION_ID } from "../constants";
 import type { PlaybackState } from "../types";
+import { getLargeImageKey } from "../utils/register-assets";
 
 export class DiscordGateway {
 	private ws: WebSocket | null = null;
@@ -8,6 +8,7 @@ export class DiscordGateway {
 	private heartbeatInterval: ReturnType<typeof setInterval> | null = null;
 	private isReady = false;
 	private isManualDisconnect = false;
+	private reconnectAttempts = 0;
 
 	async connect() {
 		this.isManualDisconnect = false;
@@ -31,7 +32,10 @@ export class DiscordGateway {
 
 		this.ws = new WebSocket("wss://gateway.discord.gg/?v=10&encoding=json");
 
-		this.ws.onopen = () => console.log("[Gateway] Connected to WebSocket");
+		this.ws.onopen = () => {
+			console.log("[Gateway] Connected to WebSocket");
+			this.reconnectAttempts = 0;
+		};
 
 		this.ws.onmessage = (event) => {
 			const payload = JSON.parse(event.data);
@@ -59,8 +63,10 @@ export class DiscordGateway {
 			this.isReady = false;
 			this.stopHeartbeat();
 			if (!this.isManualDisconnect) {
-				console.log("[Gateway] Connection dropped. Reconnecting in 5s...");
-				setTimeout(() => this.connect(), GATEWAY_RECONNECT_INTERVAL * 1000);
+				const backoff = Math.min(1000 * 2 ** this.reconnectAttempts, 30000);
+				this.reconnectAttempts++;
+				console.log(`[Gateway] Reconnecting in ${backoff / 1000}s...`);
+				setTimeout(() => this.connect(), backoff);
 			}
 		};
 	}
@@ -82,13 +88,21 @@ export class DiscordGateway {
 	}
 
 	private identify() {
+		const userAgent = navigator.userAgent.toLowerCase();
+		let currentOs = "windows";
+		if (userAgent.includes("mac")) currentOs = "macos";
+		else if (userAgent.includes("linux")) currentOs = "linux";
+		else if (userAgent.includes("android")) currentOs = "android";
+		else if (userAgent.includes("iphone") || userAgent.includes("ipad"))
+			currentOs = "ios";
+
 		this.ws?.send(
 			JSON.stringify({
 				op: 2,
 				d: {
 					token: `Bearer ${this.token}`,
 					properties: {
-						$os: "windows",
+						$os: currentOs,
 						$browser: import.meta.env.BROWSER || "chrome",
 						$device: "pc",
 					},
@@ -147,10 +161,10 @@ export class DiscordGateway {
 			},
 		};
 
-		console.log(
-			"[Gateway] Sending presence payload:",
-			JSON.stringify(payload, null, 2),
-		);
+		// console.log(
+		// 	"[Gateway] Sending presence payload:",
+		// 	JSON.stringify(payload, null, 2),
+		// );
 		this.ws.send(JSON.stringify(payload));
 	}
 
