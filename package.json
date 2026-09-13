@@ -16,6 +16,8 @@
 		"postinstall": "wxt prepare"
 	},
 	"dependencies": {
+		"lucide-react": "^1.45.0",
+		"motion": "^13.2.0",
 		"react": "^19.2.8",
 		"react-dom": "^19.2.8"
 	},
