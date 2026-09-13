@@ -15,15 +15,21 @@
 html,
 body {
 	margin: 0;
-	width: 380px;
-	min-height: 460px;
+
+	min-width: 380px;
 	background-color: var(--color-void);
 	color-scheme: dark;
 	font-family: "Inter", system-ui, -apple-system, sans-serif;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
 }
 
 #root {
 	width: 380px;
 	min-height: 460px;
 	overflow: hidden;
+	position: relative;
 }
