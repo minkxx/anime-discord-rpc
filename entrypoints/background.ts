@@ -8,6 +8,14 @@ export default defineBackground(() => {
 	gateway.connect();
 
 	let activityTimeout: ReturnType<typeof setTimeout> | null = null;
+	let activityEnabled = true;
+
+	browser.storage.local.get("activity_enabled").then((storage) => {
+		if (typeof storage.activity_enabled === "boolean") {
+			activityEnabled = storage.activity_enabled;
+		}
+	});
+
 	const currentAnimeState = {
 		title: "Unknown",
 		episode: "Unknown",
@@ -17,17 +25,26 @@ export default defineBackground(() => {
 		isPaused: false,
 	};
 
+	function clearAnimeState() {
+		currentAnimeState.title = "Unknown";
+		currentAnimeState.episode = "Unknown";
+		currentAnimeState.coverUrl = "";
+		currentAnimeState.currentMs = 0;
+		currentAnimeState.durationMs = 0;
+		currentAnimeState.isPaused = false;
+	}
+
 	function resetActivityTimeout() {
 		if (activityTimeout) clearTimeout(activityTimeout);
 		activityTimeout = setTimeout(() => {
 			gateway
 				.setActivity({ type: "STOPPED", ...currentAnimeState })
 				.catch((err) => console.error("[setActivity/timeout]", err));
+			clearAnimeState();
 		}, RESET_ACTIVITY_TIMEOUT * 1000);
 	}
 
 	browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-		// auth handlers
 		if (message.type === "LOGIN_DISCORD") {
 			loginWithDiscord()
 				.then(async (token) => {
@@ -52,6 +69,23 @@ export default defineBackground(() => {
 			return true;
 		}
 
+		if (message.type === "SET_ACTIVITY_ENABLED") {
+			activityEnabled = !!message.enabled;
+			browser.storage.local
+				.set({ activity_enabled: activityEnabled })
+				.then(() => {
+					if (!activityEnabled) {
+						if (activityTimeout) clearTimeout(activityTimeout);
+						gateway
+							.setActivity({ type: "STOPPED", ...currentAnimeState })
+							.catch((err) => console.error("[setActivity/toggle]", err));
+						clearAnimeState();
+					}
+					sendResponse({ success: true });
+				});
+			return true;
+		}
+
 		if (message.type === "GET_STATUS") {
 			browser.storage.local.get("discord_token").then((storage) => {
 				sendResponse({
@@ -59,13 +93,13 @@ export default defineBackground(() => {
 						typeof storage.discord_token === "string" &&
 						!!storage.discord_token,
 					isGatewayReady: gateway.isConnected(),
+					activityEnabled,
 					currentAnime: currentAnimeState,
 				});
 			});
 			return true;
 		}
 
-		// content.ts handlers
 		if (!sender.tab?.active) return;
 
 		if (message.type === "STOPPED") {
@@ -73,6 +107,7 @@ export default defineBackground(() => {
 				.setActivity({ type: "STOPPED", ...currentAnimeState })
 				.catch((err) => console.error("[setActivity/stopped]", err));
 			if (activityTimeout) clearTimeout(activityTimeout);
+			clearAnimeState();
 			return;
 		}
 
@@ -94,6 +129,8 @@ export default defineBackground(() => {
 		} else {
 			return;
 		}
+
+		if (!activityEnabled) return;
 
 		resetActivityTimeout();
 
