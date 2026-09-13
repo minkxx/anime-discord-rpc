@@ -16,12 +16,19 @@
 		"enabled": true,
 		"rules": {
 			"preset": "recommended",
-			"a11y": "off"
+			"a11y": {
+				"noSvgWithoutTitle": "off"
+			}
 		}
 	},
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double"
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
 		}
 	},
 	"assist": {
