@@ -1,4 +1,4 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./style.css";
@@ -6,12 +6,11 @@ import "./style.css";
 const rootElement = document.getElementById("root");
 
 if (!rootElement) {
-	console.error("Failed to mount root element.");
-	process.exit();
+	throw new Error("Failed to mount root element.");
 }
 
 ReactDOM.createRoot(rootElement).render(
-	<React.StrictMode>
+	<StrictMode>
 		<App />
-	</React.StrictMode>,
+	</StrictMode>,
 );
