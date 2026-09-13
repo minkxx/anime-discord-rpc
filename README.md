@@ -4,47 +4,19 @@
     <img src="./assets/discord-activity.png" width="400" height="auto" alt="discord-activity">
 </div>
 
-**Show off the anime you're watching on your Discord profile!**
-
-Ever wanted your Discord status to show exactly which anime and episode you are watching? This tool does exactly that! When you play, pause, or stop an anime on a supported website, your Discord status updates automatically.
+A lightweight, purely standalone browser extension that natively broadcasts the anime you are watching directly to your Discord Rich Presence. 
 
 <div align="center">
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v1.4.1-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v2.0.0-blue?style=flat&labelColor=#808080)
 
 </div>
 
----
+## How to use
 
-## What You Need
-
-* The **Discord desktop app** installed and running on your computer.
-* **Google Chrome** or **Mozilla Firefox**.
-
-## Supported Anime Sites
-
-* hianime.at
-* anikototv.to
-* anikoto.cz
-* aniwaves.ru
-* animepahe.pw (and its other links)
-
----
-
-## How to Set It Up
-
-To make the magic happen, you need to install two things: the **Desktop App** and the **Browser Extension**.
-
-### Step 1: Install the Desktop App
-
-1. Go to our [Releases page](https://github.com/minkxx/anime-discord-rpc/releases).
-2. Download the file named `anime-rpc-desktop-1.1.0.Setup.exe`.
-3. Double-click the downloaded file to install it.
-4. Open the app and let it run in the background!
-
-### Step 2: Install the Browser Extension
+Anime Discord RPC can be easily used by simply installing the extension and linking your Discord account.
 
 **If you use Firefox:**
 It's super easy! Just go to the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/anikoto-discord-rpc/) and click **"Add to Firefox"**.
@@ -52,23 +24,49 @@ It's super easy! Just go to the [Firefox Add-ons Store](https://addons.mozilla.o
 **If you use Chrome:**
 We aren't in the Chrome Web Store just yet, so follow these simple steps:
 
-1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-1.4.1-chrome.zip`.
+1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.0.0-chrome.zip`.
 2. **Extract (unzip)** that file into a regular folder on your computer.
 3. Open Google Chrome and type `chrome://extensions` into the top web address bar and press Enter.
 4. Look at the top-right corner of the screen and turn **ON** the switch for **Developer mode**.
 5. Click the **Load unpacked** button that appears on the top left.
 6. Select the folder you just unzipped. You're done!
 
-*That's it! Open one of the supported anime websites, start an episode, and check your Discord profile!*
+**Link your Discord:** Open the extension popup from your browser toolbar and click **Link with Discord**. You will be redirected to Discord's secure OAuth2 authorization page to authorize the application.
 
----
+**Start watching:** Open an episode on any supported site, and your Discord rich presence will automatically update!
 
-## Helping Out
+## v2.0.0 - The Native Update
 
-Contributions are always welcome! If you want to add a new anime site or fix a bug, please read our [Contributing Guidelines](/CONTRIBUTING.md) to learn how to set up the project and open a Pull Request.
+Anime Discord RPC has been completely rebuilt from the ground up! **Version 2.0.0 is now a standalone browser extension built with [WXT](https://wxt.dev/)**. 
 
-## 📜 License
+* **No More Desktop App:** We have completely removed the Electron desktop middleware. 
+* **Native WebSockets:** The extension now authenticates via Discord OAuth2 and connects directly to Discord's Gateway via WebSockets natively right from your browser background worker. 
+* **Better UI:** Features a sleek new React-based popup built with Tailwind CSS and Framer Motion.
 
-[MIT License](/LICENSE)
+## Features
+
+* **Rich Presence:** Displays Anime Title, Episode, and dynamic Watch/Paused states.
+* **Live Progress:** Shows real-time progress bars, elapsed time, and time remaining using Discord timestamps.
+* **Cover Art:** Automatically fetches high-quality cover art. Includes fallback support to the AniList GraphQL API for sites with protected assets (e.g., AnimePahe).
+* **Privacy Toggle:** Instantly toggle presence broadcasting on or off from the popup without needing to log out of Discord.
+* **Zero Overhead:** Completely contained within your browser with no background desktop apps required.
+
+## Supported Sites
+
+We currently support scraping metadata and video progress from the following sites and their associated video iframes:
+* **HiAnime**
+* **AnimePahe**
+* **Aniwave**
+* **Anikoto**
+
+*Don't see your favorite site? See the [Contributing](#-contributing) section to learn how to add it!*
+
+## Contributing
+
+Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for full details on how to set up your environment, write a new site strategy, and submit a Pull Request.
+
+## License
+
+Distributed under the [MIT License](/LICENSE).
 
 <p align="center">Made with ❤️ by Minkxx</p>
