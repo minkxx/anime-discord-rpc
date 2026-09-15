@@ -10,7 +10,7 @@ A lightweight, purely standalone browser extension that natively broadcasts the 
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v2.0.0-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v2.0.1-blue?style=flat&labelColor=#808080)
 
 </div>
 
@@ -35,9 +35,9 @@ We aren't in the Chrome Web Store just yet, so follow these simple steps:
 
 **Start watching:** Open an episode on any supported site, and your Discord rich presence will automatically update!
 
-## v2.0.0 - The Native Update
+## v2 - The Native Update
 
-Anime Discord RPC has been completely rebuilt from the ground up! **Version 2.0.0 is now a standalone browser extension built with [WXT](https://wxt.dev/)**. 
+Anime Discord RPC has been completely rebuilt from the ground up! **Version 2 is now a standalone browser extension built with [WXT](https://wxt.dev/)**. 
 
 * **No More Desktop App:** We have completely removed the Electron desktop middleware. 
 * **Native WebSockets:** The extension now authenticates via Discord OAuth2 and connects directly to Discord's Gateway via WebSockets natively right from your browser background worker. 
