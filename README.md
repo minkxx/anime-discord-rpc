@@ -10,7 +10,7 @@ A lightweight, purely standalone browser extension that natively broadcasts the 
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v2.0.1-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v2.0.2-blue?style=flat&labelColor=#808080)
 
 </div>
 

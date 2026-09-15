@@ -12,7 +12,7 @@ export const aniwaveStrategy: AnimeSite = {
 			"#w-info .binfo .poster img",
 		) as HTMLImageElement;
 
-		const title = titleElement?.textContent?.trim();
+		const title = titleElement?.textContent?.trim().split("Episode")[0];
 		const episode = episodeElement?.textContent?.trim();
 		const coverUrl = imageElement?.src;
 
