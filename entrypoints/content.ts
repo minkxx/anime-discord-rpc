@@ -34,7 +34,7 @@ export default defineContentScript({
 			if (metaStrategy) {
 				const meta = metaStrategy.getAnimeMetadata();
 
-				if (!meta.title) {
+				if (!meta.title || !meta.episode) {
 					browser.runtime.sendMessage({ type: "STOPPED" });
 					return;
 				}
@@ -42,8 +42,8 @@ export default defineContentScript({
 				browser.runtime.sendMessage({
 					type: "INFO_UPDATE",
 					title: meta.title,
-					episode: meta.episode || "Unknown Episode",
-					coverUrl: meta.coverUrl || "No Image Found",
+					episode: meta.episode,
+					coverUrl: meta.coverUrl,
 				});
 			}
 		}, CHECK_ACTIVITY_INTERVAL * 1000);
