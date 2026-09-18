@@ -10,7 +10,7 @@ A lightweight, purely standalone browser extension that natively broadcasts the 
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v2.0.2-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v2.1.0-blue?style=flat&labelColor=#808080)
 
 </div>
 
@@ -24,7 +24,7 @@ It's super easy! Just go to the [Firefox Add-ons Store](https://addons.mozilla.o
 **If you use Chrome:**
 We aren't in the Chrome Web Store just yet, so follow these simple steps:
 
-1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.0.0-chrome.zip`.
+1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.1.0-chrome.zip`.
 2. **Extract (unzip)** that file into a regular folder on your computer.
 3. Open Google Chrome and type `chrome://extensions` into the top web address bar and press Enter.
 4. Look at the top-right corner of the screen and turn **ON** the switch for **Developer mode**.
@@ -54,16 +54,17 @@ Anime Discord RPC has been completely rebuilt from the ground up! **Version 2 is
 ## Supported Sites
 
 We currently support scraping metadata and video progress from the following sites and their associated video iframes:
-* **HiAnime**
-* **AnimePahe**
-* **Aniwave**
 * **Anikoto**
+* **Aniwave**
+* **AnimePahe**
+* **HiAnime**
+* **Aniwatch**
 
-*Don't see your favorite site? See the [Contributing](#-contributing) section to learn how to add it!*
+*Don't see your favorite site? See the [Contributing](/CONTRIBUTING.md) section to learn how to add it!*
 
 ## Contributing
 
-Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for full details on how to set up your environment, write a new site strategy, and submit a Pull Request.
+Please see our [CONTRIBUTING.md](/CONTRIBUTING.md) for full details on how to set up your environment, write a new site strategy, and submit a Pull Request.
 
 ## License
 
