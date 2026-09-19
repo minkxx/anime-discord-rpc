@@ -1,4 +1,5 @@
 import { APPLICATION_ID } from "../../shared/constants";
+import { logger } from "../../shared/logger";
 import type { PlaybackState } from "../../shared/types";
 import { getLargeImageKey } from "../discord/assets";
 
@@ -17,7 +18,7 @@ export class DiscordGateway {
 			typeof storage.discord_token === "string" ? storage.discord_token : null;
 
 		if (!this.token) {
-			console.log("[Gateway] No token found in storage.");
+			logger.log("[Gateway] No token found in storage.");
 			return;
 		}
 
@@ -26,14 +27,14 @@ export class DiscordGateway {
 			(this.ws.readyState === WebSocket.OPEN ||
 				this.ws.readyState === WebSocket.CONNECTING)
 		) {
-			console.log("[Gateway] Already connected or connecting.");
+			logger.log("[Gateway] Already connected or connecting.");
 			return;
 		}
 
 		this.ws = new WebSocket("wss://gateway.discord.gg/?v=10&encoding=json");
 
 		this.ws.onopen = () => {
-			console.log("[Gateway] Connected to WebSocket");
+			logger.log("[Gateway] Connected to WebSocket");
 			this.reconnectAttempts = 0;
 		};
 
@@ -49,11 +50,11 @@ export class DiscordGateway {
 
 			if (op === 0 && t === "READY") {
 				this.isReady = true;
-				console.log("[Gateway] Ready and authenticated!");
+				logger.log("[Gateway] Ready and authenticated!");
 			}
 
 			if (op === 9) {
-				console.error("[Gateway] Session Invalidated. Clearing token.");
+				logger.error("[Gateway] Session Invalidated. Clearing token.");
 				this.disconnect();
 				browser.storage.local.remove("discord_token");
 			}
@@ -65,7 +66,7 @@ export class DiscordGateway {
 			if (!this.isManualDisconnect) {
 				const backoff = Math.min(1000 * 2 ** this.reconnectAttempts, 30000);
 				this.reconnectAttempts++;
-				console.log(`[Gateway] Reconnecting in ${backoff / 1000}s...`);
+				logger.log(`[Gateway] Reconnecting in ${backoff / 1000}s...`);
 				setTimeout(() => this.connect(), backoff);
 			}
 		};
@@ -161,10 +162,10 @@ export class DiscordGateway {
 			},
 		};
 
-		// console.log(
-		// 	"[Gateway] Sending presence payload:",
-		// 	JSON.stringify(payload, null, 2),
-		// );
+		logger.log(
+			"[Gateway] Sending presence payload:",
+			JSON.stringify(payload, null, 2),
+		);
 		this.ws.send(JSON.stringify(payload));
 	}
 

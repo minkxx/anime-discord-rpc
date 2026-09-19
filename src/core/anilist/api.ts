@@ -1,3 +1,5 @@
+import { logger } from "../../shared/logger";
+
 export async function fetchAnilistCover(
 	anilistId: number,
 ): Promise<string | null> {
@@ -27,7 +29,7 @@ export async function fetchAnilistCover(
 		const json = await res.json();
 		return json.data?.Media?.coverImage?.extraLarge || null;
 	} catch (error) {
-		console.error("AniList API Error:", error);
+		logger.error("AniList API Error:", error);
 		return null;
 	}
 }

@@ -1,4 +1,5 @@
 import { APPLICATION_ID } from "../../shared/constants";
+import { logger } from "../../shared/logger";
 
 function generateCodeVerifier() {
 	const array = new Uint8Array(32);
@@ -62,7 +63,7 @@ export async function loginWithDiscord(): Promise<string | null> {
 			return "mobile_pending";
 		}
 	} catch (error) {
-		console.error("Auth Error:", error);
+		logger.error("Auth Error:", error);
 		return null;
 	}
 }
@@ -139,7 +140,7 @@ export async function processLocalhostRedirect(
 
 		return { success: true, token };
 	} catch (e) {
-		console.error("Mobile Exchange Error:", e);
+		logger.error("Mobile Exchange Error:", e);
 		await browser.storage.local.remove("mobile_oauth_verifier");
 		const message =
 			e instanceof Error ? e.message : "Failed to exchange authorization code.";

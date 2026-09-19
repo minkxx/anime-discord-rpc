@@ -13,6 +13,7 @@ import {
 	setActivityEnabledFlag,
 } from "../core/state/playback";
 import { RESET_ACTIVITY_TIMEOUT } from "../shared/constants";
+import { logger } from "../shared/logger";
 
 export default defineBackground(() => {
 	const gateway = new DiscordGateway();
@@ -31,7 +32,7 @@ export default defineBackground(() => {
 		activityTimeout = setTimeout(() => {
 			gateway
 				.setActivity({ type: "STOPPED", ...currentAnimeState })
-				.catch((err) => console.error("[setActivity/timeout]", err));
+				.catch((err) => logger.error("[setActivity/timeout]", err));
 			clearAnimeState();
 		}, RESET_ACTIVITY_TIMEOUT * 1000);
 	}
@@ -99,7 +100,7 @@ export default defineBackground(() => {
 						if (activityTimeout) clearTimeout(activityTimeout);
 						gateway
 							.setActivity({ type: "STOPPED", ...currentAnimeState })
-							.catch((err) => console.error("[setActivity/toggle]", err));
+							.catch((err) => logger.error("[setActivity/toggle]", err));
 						clearAnimeState();
 					}
 					sendResponse({ success: true });
@@ -129,7 +130,7 @@ export default defineBackground(() => {
 		if (message.type === "STOPPED") {
 			gateway
 				.setActivity({ type: "STOPPED", ...currentAnimeState })
-				.catch((err) => console.error("[setActivity/stopped]", err));
+				.catch((err) => logger.error("[setActivity/stopped]", err));
 			if (activityTimeout) clearTimeout(activityTimeout);
 			clearAnimeState();
 			return;
@@ -169,6 +170,6 @@ export default defineBackground(() => {
 				type: currentAnimeState.isPaused ? "PAUSED" : "WATCHING",
 				...currentAnimeState,
 			})
-			.catch((err) => console.error("[setActivity/update]", err));
+			.catch((err) => logger.error("[setActivity/update]", err));
 	});
 });

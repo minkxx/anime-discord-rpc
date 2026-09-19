@@ -1,3 +1,4 @@
+import { logger } from "../../shared/logger";
 import type { AnimeSite } from "../../shared/types";
 import { getStandardVideoStats } from "../parser";
 
@@ -50,7 +51,7 @@ export const animepaheStrategy: AnimeSite = {
 					}
 				})
 				.catch((error) => {
-					console.error("Anilist:", error.message);
+					logger.error("Anilist:", error.message);
 					fetchFailed = true;
 				})
 				.finally(() => {

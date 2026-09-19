@@ -1,4 +1,5 @@
 import { APPLICATION_ID } from "../../shared/constants";
+import { logger } from "../../shared/logger";
 
 async function registerExternalAsset(url: string): Promise<string | null> {
 	const storage = await browser.storage.local.get("discord_token");
@@ -18,7 +19,7 @@ async function registerExternalAsset(url: string): Promise<string | null> {
 	);
 
 	if (!res.ok) {
-		console.error("[ExternalAssets] failed:", res.status, await res.text());
+		logger.error("[ExternalAssets] failed:", res.status, await res.text());
 		return null;
 	}
 

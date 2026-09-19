@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { logger } from "../../../shared/logger";
 import type { AnimeState, ViewName } from "../../../shared/types";
 import {
 	getStatus,
@@ -48,7 +49,7 @@ export function useExtensionStatus() {
 				setCurrentAnime(null);
 			}
 		} catch (err) {
-			console.error("[popup] failed to read status", err);
+			logger.error("[popup] failed to read status", err);
 		} finally {
 			setIsBootstrapping(false);
 		}
@@ -93,7 +94,7 @@ export function useExtensionStatus() {
 			try {
 				await setActivityEnabled(next);
 			} catch (err) {
-				console.error("[popup] failed to update activity flag", err);
+				logger.error("[popup] failed to update activity flag", err);
 				setActivityEnabledState(previous);
 			}
 		},

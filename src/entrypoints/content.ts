@@ -1,6 +1,7 @@
 import { extractMatches } from "../scraper/extractor";
 import { strategies } from "../scraper/sites";
 import { CHECK_ACTIVITY_INTERVAL } from "../shared/constants";
+import { logger } from "../shared/logger";
 
 export default defineContentScript({
 	matches: [...extractMatches(strategies)],
@@ -50,7 +51,7 @@ export default defineContentScript({
 					});
 				}
 			} catch (err) {
-				console.error("[Anime RPC] DOM scraping error:", err);
+				logger.error("DOM scraping error:", err);
 			}
 		}, CHECK_ACTIVITY_INTERVAL * 1000);
 	},
