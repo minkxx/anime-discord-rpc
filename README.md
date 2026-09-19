@@ -34,7 +34,7 @@ We aren't in the Chrome Web Store just yet, so follow these simple steps:
 **If you use an Android Mobile Device (via Kiwi Browser):**
 You can use this extension on the go by using an Android browser that supports Chrome extensions, such as Kiwi Browser or Lemur Browser.
 
-1. Install [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) from the Google Play Store.
+1. Install `Kiwi Browser` from the Google Play Store.
 2. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.2.2-chrome.zip` to your phone.
 3. Open Kiwi Browser, tap the three dots menu (⋮) in the top right, and select **Extensions**.
 4. Enable **Developer mode** using the toggle at the top right.
