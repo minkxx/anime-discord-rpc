@@ -11,6 +11,7 @@ export interface StatusResponse {
 	hasToken: boolean;
 	isGatewayReady: boolean;
 	activityEnabled?: boolean;
+	authError?: string | null;
 	currentAnime: {
 		title: string;
 		episode: string;
