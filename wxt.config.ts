@@ -1,9 +1,10 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "wxt";
-import { strategies } from "./strategies";
-import { extractMatches } from "./utils/extractor";
+import { extractMatches } from "./src/scraper/extractor";
+import { strategies } from "./src/scraper/sites";
 
 export default defineConfig({
+	srcDir: "src",
 	manifest: ({ browser }) => ({
 		name: "Anime RPC",
 		...(browser === "chrome"
