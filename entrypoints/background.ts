@@ -1,5 +1,5 @@
 import { RESET_ACTIVITY_TIMEOUT } from "../constants";
-import { loginWithDiscord } from "../discord/auth";
+import { loginWithDiscord, processLocalhostRedirect } from "../discord/auth";
 import { DiscordGateway } from "../discord/gateway";
 import { fetchAnilistCover } from "../utils/anilist";
 
@@ -53,11 +53,31 @@ export default defineBackground(() => {
 		}
 	});
 
+	browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+		const targetUrl = changeInfo.url || tab.url;
+		if (targetUrl?.startsWith("http://127.0.0.1/discord-auth")) {
+			browser.tabs.remove(tabId).catch(() => {});
+
+			processLocalhostRedirect(targetUrl).then(async (result) => {
+				if (result.success && result.token) {
+					await browser.storage.local.remove("auth_error");
+					await gateway.connect();
+				} else if (!result.success && result.error) {
+					await browser.storage.local.set({ auth_error: result.error });
+				}
+			});
+		}
+	});
+
 	browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 		if (message.type === "LOGIN_DISCORD") {
+			browser.storage.local.remove("auth_error");
+
 			loginWithDiscord()
 				.then(async (token) => {
-					if (token) {
+					if (token === "mobile_pending") {
+						sendResponse({ success: true, pending: true });
+					} else if (token) {
 						await gateway.connect();
 						sendResponse({ success: true });
 					} else {
@@ -96,16 +116,19 @@ export default defineBackground(() => {
 		}
 
 		if (message.type === "GET_STATUS") {
-			browser.storage.local.get("discord_token").then((storage) => {
-				sendResponse({
-					hasToken:
-						typeof storage.discord_token === "string" &&
-						!!storage.discord_token,
-					isGatewayReady: gateway.isConnected(),
-					activityEnabled,
-					currentAnime: currentAnimeState,
+			browser.storage.local
+				.get(["discord_token", "auth_error"])
+				.then((storage) => {
+					sendResponse({
+						hasToken:
+							typeof storage.discord_token === "string" &&
+							!!storage.discord_token,
+						isGatewayReady: gateway.isConnected(),
+						activityEnabled,
+						authError: storage.auth_error || null,
+						currentAnime: currentAnimeState,
+					});
 				});
-			});
 			return true;
 		}
 
