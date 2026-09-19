@@ -1,5 +1,5 @@
 import type { AnimeSite } from "../types";
-import { parseTimeText } from "../utils/parser";
+import { getStandardVideoStats } from "../utils/parser";
 
 export const aniwatchStrategy: AnimeSite = {
 	domains: ["aniwatch.cx"],
@@ -25,33 +25,5 @@ export const aniwatchStrategy: AnimeSite = {
 		};
 	},
 
-	getProgressStats: () => {
-		const videoElement = document.querySelector("video") as HTMLVideoElement;
-
-		if (videoElement) {
-			return {
-				currentMs: Math.floor(videoElement.currentTime * 1000),
-				durationMs: Math.floor(videoElement.duration * 1000),
-				remainingMs: Math.floor(
-					(videoElement.duration - videoElement.currentTime) * 1000,
-				),
-				isPaused: videoElement.paused,
-			};
-		}
-
-		const elapsedElement = document.querySelector(".jw-text-elapsed");
-		const countdownElement = document.querySelector(".jw-text-countdown");
-		const pausedElement = document.querySelector(".jw-state-paused");
-
-		const currentMs = parseTimeText(elapsedElement?.textContent);
-		const remainingMs = parseTimeText(countdownElement?.textContent);
-		const durationMs = currentMs + remainingMs;
-
-		return {
-			currentMs,
-			remainingMs,
-			durationMs,
-			isPaused: pausedElement ? true : null,
-		};
-	},
+	getProgressStats: () => getStandardVideoStats(),
 };
