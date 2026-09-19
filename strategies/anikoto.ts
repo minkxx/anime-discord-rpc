@@ -1,5 +1,5 @@
 import type { AnimeSite } from "../types";
-import { parseTimeText } from "../utils/parser";
+import { getStandardVideoStats } from "../utils/parser";
 
 export const anikotoStrategy: AnimeSite = {
 	domains: ["anikototv.to", "anikoto.cz"],
@@ -23,20 +23,5 @@ export const anikotoStrategy: AnimeSite = {
 		};
 	},
 
-	getProgressStats: () => {
-		const elapsedElement = document.querySelector(".jw-text-elapsed");
-		const countdownElement = document.querySelector(".jw-text-countdown");
-		const pausedElement = document.querySelector(".jw-state-paused");
-
-		const currentMs = parseTimeText(elapsedElement?.textContent);
-		const remainingMs = parseTimeText(countdownElement?.textContent);
-		const durationMs = currentMs + remainingMs;
-
-		return {
-			currentMs,
-			remainingMs,
-			durationMs,
-			isPaused: pausedElement ? true : null,
-		};
-	},
+	getProgressStats: () => getStandardVideoStats(),
 };
