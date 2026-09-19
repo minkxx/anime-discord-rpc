@@ -10,7 +10,7 @@ A lightweight, purely standalone browser extension that natively broadcasts the 
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v2.2.0-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v2.2.2-blue?style=flat&labelColor=#808080)
 
 </div>
 
@@ -18,20 +18,32 @@ A lightweight, purely standalone browser extension that natively broadcasts the 
 
 Anime Discord RPC can be easily used by simply installing the extension and linking your Discord account.
 
-**If you use Firefox:**
+**If you use Firefox (Desktop & Android):**
 It's super easy! Just go to the [Firefox Add-ons Store](https://addons.mozilla.org/en-US/firefox/addon/anikoto-discord-rpc/) and click **"Add to Firefox"**.
 
-**If you use Chrome:**
+**If you use Chrome (Desktop):**
 We aren't in the Chrome Web Store just yet, so follow these simple steps:
 
-1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.2.0-chrome.zip`.
+1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.2.2-chrome.zip`.
 2. **Extract (unzip)** that file into a regular folder on your computer.
 3. Open Google Chrome and type `chrome://extensions` into the top web address bar and press Enter.
 4. Look at the top-right corner of the screen and turn **ON** the switch for **Developer mode**.
 5. Click the **Load unpacked** button that appears on the top left.
 6. Select the folder you just unzipped. You're done!
 
-**Link your Discord:** Open the extension popup from your browser toolbar and click **Link with Discord**. You will be redirected to Discord's secure OAuth2 authorization page to authorize the application.
+**If you use an Android Mobile Device (via Kiwi Browser):**
+You can use this extension on the go by using an Android browser that supports Chrome extensions, such as Kiwi Browser or Lemur Browser.
+
+1. Install `Kiwi Browser` from the Google Play Store.
+2. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.2.2-chrome.zip` to your phone.
+3. Open Kiwi Browser, tap the three dots menu (⋮) in the top right, and select **Extensions**.
+4. Enable **Developer mode** using the toggle at the top right.
+5. Tap the **+ (from .zip/.crx/.user.js)** button and select the downloaded `.zip` file from your device storage.
+6. Open the extension from the bottom of the three dots menu!
+
+---
+
+**Link your Discord:** Open the extension popup from your browser toolbar (or menu) and click **Link with Discord**. You will be redirected to Discord's secure OAuth2 authorization page to authorize the application.
 
 **Start watching:** Open an episode on any supported site, and your Discord rich presence will automatically update!
 
@@ -47,6 +59,7 @@ Anime Discord RPC has been completely rebuilt from the ground up! **Version 2 is
 
 * **Rich Presence:** Displays Anime Title, Episode, and dynamic Watch/Paused states.
 * **Live Progress:** Shows real-time progress bars, elapsed time, and time remaining using Discord timestamps.
+* **Mobile Support:** Fully functional on Android extension-supported browsers with a custom mobile OAuth authentication flow.
 * **Cover Art:** Automatically fetches high-quality cover art. Includes fallback support to the AniList GraphQL API for sites with protected assets (e.g., AnimePahe).
 * **Privacy Toggle:** Instantly toggle presence broadcasting on or off from the popup without needing to log out of Discord.
 * **Zero Overhead:** Completely contained within your browser with no background desktop apps required.
