@@ -27,6 +27,15 @@ export function useExtensionStatus() {
 			setIsGatewayReady(res.isGatewayReady);
 			setActivityEnabledState(res.activityEnabled ?? true);
 
+			if (res.authError) {
+				setError(res.authError);
+				setIsAuthLoading(false);
+				await browser.storage.local.remove("auth_error");
+			} else if (res.hasToken) {
+				setIsAuthLoading(false);
+				setError(null);
+			}
+
 			const anime = res.currentAnime;
 			if (anime?.title && anime.title !== "Unknown") {
 				setCurrentAnime({
@@ -60,12 +69,11 @@ export function useExtensionStatus() {
 			const res = await loginDiscord();
 			if (!res?.success) {
 				setError(res?.error ?? "Login was cancelled or failed.");
-				return;
+				setIsAuthLoading(false);
 			}
 			await refresh();
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Something went wrong.");
-		} finally {
 			setIsAuthLoading(false);
 		}
 	}, [refresh]);
