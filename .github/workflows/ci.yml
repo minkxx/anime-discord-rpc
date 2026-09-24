@@ -1,22 +1,58 @@
-name: Code quality
+name: CI
 
 on:
   push:
+    branches: [main, dev]
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   quality:
+    name: Lint and Typecheck
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          persist-credentials: false
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Biome Lint
+        run: bunx biome ci .
+
+      - name: Typecheck
+        run: bun run typecheck
+  build:
+    name: Build Extension (${{ matrix.browser }})
+    needs: quality
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, firefox]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build and Zip
+        run: bun run zip:${{ matrix.browser }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
-          version: latest
-      - name: Run Biome
-        run: biome ci .
+          name: anime-rpc-${{ matrix.browser }}-build
+          path: .output/*-${{ matrix.browser }}.zip
