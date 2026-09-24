@@ -1,0 +1,10 @@
+{
+	"name": "Anime Discord RPC (Bun)",
+	"image": "oven/bun:latest",
+	"customizations": {
+		"vscode": {
+			"extensions": ["biomejs.biome", "bradlc.vscode-tailwindcss"]
+		}
+	},
+	"postCreateCommand": "bun install && bunx lefthook install"
+}
