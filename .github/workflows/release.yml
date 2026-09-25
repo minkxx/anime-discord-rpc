@@ -34,5 +34,4 @@ jobs:
         with:
           generate_release_notes: true
           files: |
-            .output/*-chrome.zip
-            .output/*-firefox.zip
+            .output/*.zip
