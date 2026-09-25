@@ -51,8 +51,13 @@ jobs:
       - name: Build and Zip
         run: bun run zip:${{ matrix.browser }}
 
+      - name: Prepare Artifacts
+        run: |
+          mkdir -p artifacts
+          mv .output/*.zip artifacts/
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: anime-rpc-${{ matrix.browser }}-build
-          path: .output/*-${{ matrix.browser }}.zip
+          path: artifacts/*.zip
