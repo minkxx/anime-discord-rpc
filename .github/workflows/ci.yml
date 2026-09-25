@@ -55,4 +55,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: anime-rpc-${{ matrix.browser }}-build
-          path: .output/*-${{ matrix.browser }}.zip
+          path: .output/*.zip
