@@ -1,7 +1,7 @@
 # Anime Discord RPC
 
 <div align="center">
-    <img src="./assets/discord-activity.png" width="400" height="auto" alt="discord-activity">
+    <img src="./.github/assets/discord-activity.png" width="400" height="auto" alt="discord-activity">
 </div>
 
 A lightweight, purely standalone browser extension that natively broadcasts the anime you are watching directly to your Discord Rich Presence. 
