@@ -23,13 +23,13 @@
 		"postinstall": "wxt prepare"
 	},
 	"dependencies": {
-		"lucide-react": "^1.49.0",
-		"motion": "^13.5.0",
+		"lucide-react": "^1.52.0",
+		"motion": "^14.0.0",
 		"react": "^19.3.0",
 		"react-dom": "^19.3.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.13",
+		"@biomejs/biome": "2.5.15",
 		"@commitlint/cli": "^21.2.3",
 		"@commitlint/config-conventional": "^21.2.3",
 		"@tailwindcss/vite": "^4.3.3",
