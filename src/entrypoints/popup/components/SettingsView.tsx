@@ -1,6 +1,6 @@
-import { ArrowLeft, CodeXml, ExternalLink, LogOut } from "lucide-react";
+import { ArrowLeft, ExternalLink, Link, LogOut } from "lucide-react";
 import { motion } from "motion/react";
-import { DEV_DISCORD_URL } from "../../../shared/constants";
+import { DISCORD_SERVER_URL } from "../../../shared/constants";
 import type { ExtensionStatus } from "../hooks/useExtensionStatus";
 import { InkDivider } from "./decor/InkDivider";
 import { ToggleSwitch } from "./ToggleSwitch";
@@ -33,14 +33,14 @@ export function SettingsView({ status }: SettingsViewProps) {
 			<InkDivider className="my-1 opacity-60" />
 
 			<a
-				href={DEV_DISCORD_URL}
+				href={DISCORD_SERVER_URL}
 				target="_blank"
 				rel="noreferrer"
 				className="flex items-center justify-between rounded-2xl border border-white/10 bg-panel-2/60 px-3.5 py-2.5 text-[12.5px] font-medium text-ink transition-colors hover:border-dusk/40"
 			>
 				<span className="flex items-center gap-2">
-					<CodeXml size={15} className="text-dusk" />
-					Developer
+					<Link size={15} className="text-dusk" />
+					Join Our Discord Server
 				</span>
 				<ExternalLink size={13} className="text-muted" />
 			</a>

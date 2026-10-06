@@ -18,6 +18,8 @@ A lightweight, purely standalone browser extension that natively broadcasts the 
 ![Firefox Active Users](https://img.shields.io/badge/firefox_active_users-12-blue?style=flat&labelColor=555555)
 <!-- DOWNLOADS:END -->
 
+<a href="https://discord.gg/w9Q7YUrzpn"><img src="https://invidget.switchblade.xyz/w9Q7YUrzpn"></a>
+
 </div>
 
 ## How to use
@@ -41,7 +43,7 @@ We aren't in the Chrome Web Store just yet, so follow these simple steps:
 You can use this extension on the go by using an Android browser that supports Chrome extensions, such as Kiwi Browser or Lemur Browser.
 
 1. Install [Kiwi Browser](https://github.com/kiwibrowser/src.next/releases/tag/14310011181) from the official github release.
-2. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.3.0-chrome.zip` to your phone.
+2. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.4.0-chrome.zip` to your phone.
 3. Open Kiwi Browser, tap the three dots menu (⋮) in the top right, and select **Extensions**.
 4. Enable **Developer mode** using the toggle at the top right.
 5. Tap the **+ (from .zip/.crx/.user.js)** button and select the downloaded `.zip` file from your device storage.
@@ -78,6 +80,7 @@ We currently support scraping metadata and video progress from the following sit
 * **AnimePahe**
 * **HiAnime**
 * **Aniwatch**
+* **ReAnime**
 
 *Don't see your favorite site? See the [Contributing](./.github/CONTRIBUTING.md) section to learn how to add it!*
 
