@@ -10,7 +10,7 @@ A lightweight, purely standalone browser extension that natively broadcasts the 
 
 ![Stars](https://img.shields.io/github/stars/minkxx/anime-discord-rpc?style=flat)
 ![Forks](https://img.shields.io/github/forks/minkxx/anime-discord-rpc?style=flat)
-![Version](https://img.shields.io/badge/version-v2.3.0-blue?style=flat&labelColor=#808080)
+![Version](https://img.shields.io/badge/version-v2.4.0-blue?style=flat&labelColor=#808080)
 
 <!-- DOWNLOADS:START -->
 ![GitHub Downloads](https://img.shields.io/badge/github_downloads-163-blue?style=flat&labelColor=555555)
@@ -30,7 +30,7 @@ It's super easy! Just go to the [Firefox Add-ons Store](https://addons.mozilla.o
 **If you use Chrome (Desktop):**
 We aren't in the Chrome Web Store just yet, so follow these simple steps:
 
-1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.3.0-chrome.zip`.
+1. Go to the [Releases page](https://github.com/minkxx/anime-discord-rpc/releases) and download `anime-rpc-extension-2.4.0-chrome.zip`.
 2. **Extract (unzip)** that file into a regular folder on your computer.
 3. Open Google Chrome and type `chrome://extensions` into the top web address bar and press Enter.
 4. Look at the top-right corner of the screen and turn **ON** the switch for **Developer mode**.
