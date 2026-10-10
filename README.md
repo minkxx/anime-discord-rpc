@@ -13,8 +13,8 @@ A lightweight, purely standalone browser extension that natively broadcasts the 
 ![Version](https://img.shields.io/badge/version-v2.4.0-blue?style=flat&labelColor=#808080)
 
 <!-- DOWNLOADS:START -->
-![GitHub Downloads](https://img.shields.io/badge/github_downloads-170-blue?style=flat&labelColor=555555)
-![Firefox Weekly Downloads](https://img.shields.io/badge/firefox_weekly_downloads-8-blue?style=flat&labelColor=555555)
+![GitHub Downloads](https://img.shields.io/badge/github_downloads-175-blue?style=flat&labelColor=555555)
+![Firefox Weekly Downloads](https://img.shields.io/badge/firefox_weekly_downloads-9-blue?style=flat&labelColor=555555)
 ![Firefox Active Users](https://img.shields.io/badge/firefox_active_users-15-blue?style=flat&labelColor=555555)
 <!-- DOWNLOADS:END -->
 
